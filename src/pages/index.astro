@@ -18,7 +18,7 @@ const hrefFor = (p: (typeof all)[number]) =>
 <Base>
   <Header />
   <section class="about">
-    {site.about.split('\n\n').map((para) => <p>{para}</p>)}
+    {site.about.trim().split(/\n\s*\n/).map((para) => <p>{para.trim()}</p>)}
   </section>
 
   {featured.length > 0 && (
