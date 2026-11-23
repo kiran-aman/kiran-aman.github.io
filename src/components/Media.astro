@@ -1,0 +1,19 @@
+---
+// Renders an image/GIF, or an autoplaying looped video for .mp4/.webm.
+interface Props {
+  src?: string;
+  alt: string;
+  class?: string;
+}
+const { src, alt, class: className } = Astro.props;
+const isVideo = src && /\.(mp4|webm)$/i.test(src);
+---
+{src ? (
+  isVideo ? (
+    <video class={className} src={src} autoplay muted loop playsinline aria-label={alt} />
+  ) : (
+    <img class={className} src={src} alt={alt} loading="lazy" decoding="async" />
+  )
+) : (
+  <div class:list={[className, 'media-empty']} aria-hidden="true" />
+)}

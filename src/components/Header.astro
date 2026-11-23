@@ -1,0 +1,15 @@
+---
+import { site } from '../site';
+const links = [
+  site.email && { label: 'Email', href: `mailto:${site.email}` },
+  site.github && { label: 'GitHub', href: site.github },
+  site.linkedin && { label: 'LinkedIn', href: site.linkedin },
+  site.resume && { label: 'Resume', href: site.resume },
+].filter(Boolean) as { label: string; href: string }[];
+---
+<header class="site-header">
+  <h1><a href="/">{site.name}</a></h1>
+  <nav class="contact">
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  </nav>
+</header>

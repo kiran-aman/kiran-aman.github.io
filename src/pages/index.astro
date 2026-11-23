@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Media from '../components/Media.astro';
+import { site } from '../site';
+
+const all = (await getCollection('projects', (p) => !p.data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const featured = all.filter((p) => p.data.featured);
+const other = all.filter((p) => !p.data.featured);
+
+const hasPage = (p: (typeof all)[number]) => Boolean(p.body?.trim());
+const hrefFor = (p: (typeof all)[number]) =>
+  hasPage(p) ? `/projects/${p.id}/` : p.data.links.repo ?? p.data.links.demo;
+---
+<Base>
+  <Header />
+  <section class="about">
+    {site.about.split('\n\n').map((para) => <p>{para}</p>)}
+  </section>
+
+  {featured.length > 0 && (
+    <section>
+      <h2>Projects</h2>
+      <ul class="project-list">
+        {featured.map((p) => (
+          <li class="project">
+            <a class="thumb" href={hrefFor(p)} tabindex="-1">
+              <Media src={p.data.thumbnail} alt={p.data.title} />
+            </a>
+            <div>
+              <h3><a href={hrefFor(p)}>{p.data.title}</a></h3>
+              <p>{p.data.summary}</p>
+              <p class="meta">
+                {[...p.data.tags, p.data.date.getUTCFullYear()].join(' · ')}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {other.length > 0 && (
+    <section>
+      <h2>Other work</h2>
+      <ul class="gallery">
+        {other.map((p) => {
+          const href = hrefFor(p);
+          const Tag = href ? 'a' : 'div';
+          return (
+            <li>
+              <Tag class="tile" href={href}>
+                <Media src={p.data.thumbnail} alt={p.data.title} />
+                <span class="tile-title">{p.data.title}</span>
+                <span class="meta">{p.data.summary}</span>
+              </Tag>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+</Base>
