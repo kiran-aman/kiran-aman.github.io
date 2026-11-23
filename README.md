@@ -13,6 +13,12 @@ by `.github/workflows/deploy.yml` on every push to `main`.
   - A project with body text gets its own page. One with no body links straight to `links.repo`.
   - `thumbnail` can be a `.png`, `.jpg`, `.gif`, `.mp4` or `.webm` (videos autoplay muted on loop,
     and are much smaller than GIFs)
+  - `achievements:` is a list of short highlights shown on the home page and the project page:
+    ```yaml
+    achievements:
+      - 1st place, NJIT Hackathon 2026
+      - Reduced path-planning time by 40%
+    ```
   - `draft: true` hides a project
 
 ## Local preview

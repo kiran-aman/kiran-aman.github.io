@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, summary, tags, date, thumbnail, links } = project.data;
+const { title, summary, tags, date, thumbnail, links, achievements } = project.data;
 const linkList = [
   links.repo && { label: 'Code', href: links.repo },
   links.demo && { label: 'Demo', href: links.demo },
@@ -27,6 +27,11 @@ const linkList = [
     </p>
     {linkList.length > 0 && (
       <p class="links">{linkList.map((l) => <a href={l.href}>{l.label}</a>)}</p>
+    )}
+    {achievements.length > 0 && (
+      <ul class="achievements">
+        {achievements.map((a) => <li>{a}</li>)}
+      </ul>
     )}
     {thumbnail && <Media class="hero" src={thumbnail} alt={title} />}
     <div class="prose">

@@ -126,3 +126,14 @@ a.tile .tile-title { color: var(--link); }
 .prose h2 { border: none; margin: 32px 0 8px; padding: 0; }
 .prose pre { overflow-x: auto; padding: 14px; border-radius: 4px; font-size: 0.85rem; }
 .prose code { font-size: 0.9em; }
+
+/* Achievements */
+.achievements {
+  margin: 6px 0 6px;
+  padding-left: 1.1em;
+  list-style: disc;
+  font-size: 0.9rem;
+}
+.achievements li { margin: 0; }
+.achievements li::marker { color: var(--muted); }
+.project-page .achievements { margin: 0 0 24px; font-size: 1rem; }

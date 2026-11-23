@@ -33,6 +33,11 @@ const hrefFor = (p: (typeof all)[number]) =>
             <div>
               <h3><a href={hrefFor(p)}>{p.data.title}</a></h3>
               <p>{p.data.summary}</p>
+              {p.data.achievements.length > 0 && (
+                <ul class="achievements">
+                  {p.data.achievements.map((a) => <li>{a}</li>)}
+                </ul>
+              )}
               <p class="meta">
                 {[...p.data.tags, p.data.date.getUTCFullYear()].join(' · ')}
               </p>
