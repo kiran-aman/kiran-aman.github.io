@@ -39,9 +39,21 @@ const linkList = [
       </ul>
     )}
     {heroList.length > 0 && (
-      <figure class="hero" style={`--n: ${heroList.length}`}>
+      <figure
+        class="hero"
+        style={`--n: ${heroList.length}`}
+        data-match={heroList.length === 2 && heroList.filter(Array.isArray).length === 1 ? '' : undefined}
+      >
         <div class="hero-grid">
-          {heroList.map((src, i) => <Media src={src} alt={`${title} ${i + 1}`} data-zoom />)}
+          {heroList.map((item, i) =>
+            Array.isArray(item) ? (
+              <div class="hero-stack">
+                {item.map((src, j) => <Media src={src} alt={`${title} ${i + 1}.${j + 1}`} data-zoom />)}
+              </div>
+            ) : (
+              <Media src={item} alt={`${title} ${i + 1}`} data-zoom />
+            ),
+          )}
         </div>
         {heroCaption && <figcaption class="meta">{heroCaption}</figcaption>}
       </figure>
@@ -52,3 +64,24 @@ const linkList = [
     </div>
   </article>
 </Base>
+
+<script>
+  // Hero with one image + one stack of squares: size the columns so both are the same height.
+  for (const fig of document.querySelectorAll<HTMLElement>('.hero[data-match]')) {
+    const grid = fig.querySelector<HTMLElement>('.hero-grid')!;
+    const stack = grid.querySelector<HTMLElement>('.hero-stack')!;
+    const single = [...grid.children].find((c) => c !== stack) as HTMLImageElement | HTMLVideoElement;
+    if (stack.firstElementChild !== null && single === grid.lastElementChild) grid.classList.add('stack-first');
+    const fit = () => {
+      const w = 'naturalWidth' in single ? single.naturalWidth : single.videoWidth;
+      const h = 'naturalHeight' in single ? single.naturalHeight : single.videoHeight;
+      if (!w || !h) return;
+      grid.style.setProperty('--r', String(w / h));
+      grid.style.setProperty('--k', String(stack.children.length));
+      grid.classList.add('matched');
+    };
+    fit();
+    single.addEventListener('load', fit);
+    single.addEventListener('loadedmetadata', fit);
+  }
+</script>

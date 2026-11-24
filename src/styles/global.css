@@ -129,9 +129,20 @@ a.tile .tile-title { color: var(--link); }
   align-items: start;
 }
 .hero-grid img, .hero-grid video { width: 100%; border-radius: 4px; border: 1px solid var(--rule); }
+.hero-stack { display: flex; flex-direction: column; gap: 12px; }
+/* Image + stack: stack width chosen so k squares (plus gaps) are as tall as the image.
+   r = image width / height. */
+.hero-grid.matched {
+  --gap: 12px;
+  grid-template-columns: 1fr calc((100% - var(--gap) - var(--r) * (var(--k) - 1) * var(--gap)) / (1 + var(--r) * var(--k)));
+}
+.hero-grid.matched.stack-first {
+  grid-template-columns: calc((100% - var(--gap) - var(--r) * (var(--k) - 1) * var(--gap)) / (1 + var(--r) * var(--k))) 1fr;
+}
+.hero-stack img, .hero-stack video { aspect-ratio: 1 / 1; object-fit: cover; }
 .hero figcaption { margin-top: 8px; text-align: center; }
 @media (max-width: 560px) {
-  .hero-grid { grid-template-columns: 1fr; }
+  .hero-grid, .hero-grid.matched, .hero-grid.matched.stack-first { grid-template-columns: 1fr; }
 }
 .prose img, .prose video { margin: 20px 0; border-radius: 4px; }
 .prose h2 { border: none; margin: 32px 0 8px; padding: 0; }

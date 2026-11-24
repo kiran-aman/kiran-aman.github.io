@@ -12,8 +12,9 @@ const projects = defineCollection({
     // Path to a file in public/, e.g. /projects/rover/thumb.gif (png, jpg, gif, mp4, webm).
     thumbnail: z.string().optional(),
     // Big image(s) at the top of the project page. One path, or a list shown side by side.
+    // A list inside the list is a column of square (1:1) images stacked top to bottom.
     // Defaults to the thumbnail when left out.
-    hero: z.union([z.string(), z.array(z.string())]).optional(),
+    hero: z.union([z.string(), z.array(z.union([z.string(), z.array(z.string())]))]).optional(),
     heroCaption: z.string().optional(),
     // true = big entry in "Projects"; false = small tile in "Other work".
     featured: z.boolean().default(false),
