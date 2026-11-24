@@ -5,8 +5,11 @@ import Header from '../components/Header.astro';
 import Media from '../components/Media.astro';
 import { site } from '../site';
 
+const year = (s: string) =>
+  /present/i.test(s) ? 9999 : Math.max(0, ...(s.match(/\d{4}/g) ?? []).map(Number));
+
 const all = (await getCollection('projects', (p) => !p.data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  (a, b) => year(b.data.date) - year(a.data.date),
 );
 const featured = all.filter((p) => p.data.featured);
 const other = all.filter((p) => !p.data.featured);
@@ -39,7 +42,7 @@ const hrefFor = (p: (typeof all)[number]) =>
                 </ul>
               )}
               <p class="meta">
-                {[...p.data.tags, p.data.date.getUTCFullYear()].join(' · ')}
+                {[...p.data.tags, p.data.date].join(' · ')}
               </p>
             </div>
           </li>

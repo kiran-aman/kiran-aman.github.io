@@ -1,16 +1,16 @@
 ---
 title: Compact SPM-SIP Stabilizer
 summary: Coaxial 3-RRR Spherical Parallel Manipulator (SPM) for Compact Spherical Inverted Pendulum (SIP) Stabilization [ONGOING]
-date: 2025-10
+date: 2025-Present
 tags: [Robotics, Mechanical Design, Control]
-thumbnail: /projects/example-one/thumb.svg
+thumbnail: /projects/spm/circle_rot.mp4
 featured: true
 achievements: 
   - IROS 2026 Late-Breaking Result
   - NJIT Dean's Fund Travel Grant
   - NJIT URI Phase 1 Seed Grant Finalist
 links:
-  repo: https://github.com/kiran-aman
+  repo: https://github.com/kiran-aman/spm
 ---
 
 ## Overview
