@@ -328,3 +328,41 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
 
 /* Math: let wide equations scroll sideways instead of overflowing on phones */
 .prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+
+/* Side image: ![alt](/path.jpg){.side} placed just before a paragraph floats it to the right */
+.prose img.side {
+  float: right;
+  width: 36%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 4px 0 12px 24px;
+  border: 1px solid var(--rule);
+}
+.prose p:has(> img.side:only-child) { margin: 0; }
+.prose h2, .prose details { clear: both; }
+.prose::after { content: ''; display: block; clear: both; }
+@media (max-width: 560px) {
+  .prose img.side { float: none; width: 100%; margin: 0 0 12px; }
+}
+
+/* Collapsible sections: <details><summary><h2>Title</h2></summary> ... </details> */
+.prose details { margin: 32px 0 0; border-bottom: 1px solid var(--rule); }
+.prose summary {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+  padding-bottom: 8px;
+}
+.prose summary::-webkit-details-marker { display: none; }
+.prose summary h2 { margin: 0; flex: 1; }
+.prose summary::before {
+  content: '▸';
+  color: var(--muted);
+  transition: transform 150ms;
+}
+.prose details[open] > summary::before { transform: rotate(90deg); }
+.prose summary::after { content: 'Show'; color: var(--link); font-size: 0.85rem; }
+.prose details[open] > summary::after { content: 'Hide'; }
+.prose details[open] { padding-bottom: 12px; }

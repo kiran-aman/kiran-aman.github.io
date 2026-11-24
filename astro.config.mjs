@@ -16,6 +16,6 @@ const katexPlugin = {
 export default defineConfig({
   site: 'https://kiran-aman.github.io',
   markdown: {
-    processor: satteri({ features: { math: true }, mdastPlugins: [katexPlugin] }),
+    processor: satteri({ features: { math: true, attributes: true }, mdastPlugins: [katexPlugin] }),
   },
 });

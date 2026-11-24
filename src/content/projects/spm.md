@@ -36,12 +36,17 @@ This was accepted and presented at IROS 2026 as a Late-Breaking Result in Pittsb
 **Kiran Aman** and Adeel Akhtar (2026, September). *Geometric Modeling and Hardware Validation of a Coaxial 3-RRR Manipulator for Spherical Inverted Pendulum Stabilization*.
 
 ## Significance
+
+![Significance figure](/projects/spm/significance.svg){.side}
+
 This SPM-SIP system allows the tasks of **locomotion** and **stabilization** to be separated. Hence, path planning of a mobile robot that mounts the SPM-SIP system can stay smooth without pertubations cauesd by stabilization tasks and vice versa. Separation of these tasks is important for safe locomotion, for example through a crowded street or cluttered ground, where deviations from the planned path caused by stabilization may cause the mobile base to crash.
 
 Thus, the end goal of this project is to mount the SPM-SIP system to a mobile robot and send it on its way, given we are able to **validate** it in simulation and controlled real-world environments. 
 
 
-## How it works
+<details>
+<summary><h2>How it works</h2></summary>
+
 
 The SPM mechanically constrains the end effector (a pivot offset from $o$) to traverse the surface of a sphere about a remote center of rotation. This property is what I believe will allow us to balance an SIP in a **compact** manner; that is, we see that rotation about this remote center creates **necessary translational accelerations** to act on the pendulum such that
 
@@ -69,8 +74,12 @@ $$
 which is the full, coupled SPM-SIP model.
 
 
-![System diagram](/projects/example-one/thumb.svg)
+</details>
 
-## What I learned
+<details>
+<summary><h2>What I learned</h2></summary>
+
 
 Challenges, tradeoffs, what you'd do differently.
+
+</details>

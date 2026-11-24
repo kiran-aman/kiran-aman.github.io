@@ -42,6 +42,21 @@ by `.github/workflows/deploy.yml` on every push to `main`.
   for a commented example. A category can have `notes:` (full-width footnotes, e.g. for `*` or `†`
   markers in spec values). Images go in `public/projects/<project-id>/`.
 
+## Write-up extras
+
+- **Collapsible section** (starts collapsed). Keep the blank lines:
+  ```html
+  <details>
+  <summary><h2>How it works</h2></summary>
+
+  Normal Markdown here...
+
+  </details>
+  ```
+  Add `open` (`<details open>`) to start it expanded.
+- **Square image to the right of a paragraph:** put `![alt](/projects/spm/fig.jpg){.side}` on its
+  own line just before the paragraph. It's cropped to 1:1 and moves above the text on phones.
+
 ## Math
 
 Write LaTeX in any project write-up: `$\tau = J\ddot{\theta}$` inline, or a display equation:
