@@ -1,18 +1,20 @@
 ---
 // Renders an image/GIF, or an autoplaying looped video for .mp4/.webm.
+// Extra attributes (style, data-zoom, ...) are passed through to the element.
 interface Props {
   src?: string;
   alt: string;
   class?: string;
+  [key: string]: unknown;
 }
-const { src, alt, class: className } = Astro.props;
+const { src, alt, class: className, ...rest } = Astro.props;
 const isVideo = src && /\.(mp4|webm)$/i.test(src);
 ---
 {src ? (
   isVideo ? (
-    <video class={className} src={src} autoplay muted loop playsinline aria-label={alt} />
+    <video class={className} src={src} autoplay muted loop playsinline aria-label={alt} {...rest} />
   ) : (
-    <img class={className} src={src} alt={alt} loading="lazy" decoding="async" />
+    <img class={className} src={src} alt={alt} loading="lazy" decoding="async" {...rest} />
   )
 ) : (
   <div class:list={[className, 'media-empty']} aria-hidden="true" />

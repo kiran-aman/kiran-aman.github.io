@@ -1,0 +1,94 @@
+# Design iterations for the SPM project (shown on /projects/spm/).
+#
+# categories = rows of the comparison. Add, remove or reorder freely.
+#   id:    short name used below (lowercase, dashes)
+#   specs: the spec rows shown for that category
+#
+# versions = columns, OLDEST FIRST. Add a new version at the bottom.
+#   Under each version, use a category id as a key with any of:
+#     images: list of paths in public/ (stacked top to bottom; jpg/png/gif/mp4/webm)
+#     specs:  values for that category's spec names (plain text, e.g. "±0.5°")
+#     notes:  a sentence or two
+#   Missing specs show as "—".
+
+title: Design iterations
+
+categories:
+  - id: drivetrain
+    title: Drivetrain design
+    specs: [Drive type, Backlash, Reduction, Torque, Max speed]
+  - id: platform
+    title: End effector platform
+    specs: [Functionality, Parameters, Slop]
+  - id: manufacturing
+    title: Manufacturing method
+    specs: [Method]
+  - id: controller
+    title: Hardware controller
+    specs: [Motor controllers, Microcontroller, Microprocessor, Controller]
+  - id: actuators
+    title: Actuators
+    specs: [Motors]
+
+versions:
+  - name: V1
+    label: Spur gear drive
+    date: "2025"
+    summary: Placeholder — one or two sentences on V1.
+    drivetrain:
+      images: [/projects/spm/v1/drivetrain-1.svg, /projects/spm/v1/drivetrain-2.svg]
+      specs:
+        Drive type: Spur gears
+    platform:
+      images: [/projects/spm/v1/platform-1.svg]
+    manufacturing:
+      images: [/projects/spm/v1/manufacturing-1.svg]
+    controller:
+      images: [/projects/spm/v1/controller-1.svg]
+    actuators:
+      images: [/projects/spm/v1/actuators-1.svg]
+
+  - name: V2
+    label: Belt drive
+    date: "2026"
+    status: Presented at IROS 2026
+    summary: Placeholder — one or two sentences on V2.
+    improvements:
+      - Placeholder — what V2 improved over V1
+    drivetrain:
+      images: [/projects/spm/v2/drivetrain-1.svg, /projects/spm/v2/drivetrain-2.svg]
+      specs:
+        Drive type: Timing belt
+    platform:
+      images: [/projects/spm/v2/platform-1.svg]
+    manufacturing:
+      images: [/projects/spm/v2/manufacturing-1.svg]
+    controller:
+      images: [/projects/spm/v2/controller-1.svg]
+    actuators:
+      images: [/projects/spm/v2/actuators-1.svg]
+
+  - name: V3
+    label: Direct drive
+    date: "2026 – Present"
+    status: In development
+    summary: Placeholder — one or two sentences on V3.
+    improvements:
+      - Eliminates backlash
+      - Enables computed torque control
+    drivetrain:
+      images: [/projects/spm/v3/drivetrain-1.svg, /projects/spm/v3/drivetrain-2.svg]
+      specs:
+        Drive type: Direct drive
+        Backlash: None
+    platform:
+      images: [/projects/spm/v3/platform-1.svg]
+    manufacturing:
+      images: [/projects/spm/v3/manufacturing-1.svg]
+      specs:
+        Method: Theoretical — CAM toolpaths
+      notes: Planned manufacturing; shown as CAM rather than finished parts.
+    controller:
+      images: [/projects/spm/v3/controller-1.svg]
+    actuators:
+      images: [/projects/spm/v3/actuators-1.svg]

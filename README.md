@@ -21,6 +21,17 @@ by `.github/workflows/deploy.yml` on every push to `main`.
     ```
   - `draft: true` hides a project
 
+## Project page extras
+
+- **Hero images:** `hero:` in a project's frontmatter takes one path or a list shown side by side,
+  with an optional `heroCaption:`. Without it, the thumbnail is used.
+- **Click to enlarge:** hero images, design-iteration images and images in write-ups open full size
+  when clicked.
+- **Design iterations:** create `src/content/versions/<project-id>.yaml` (e.g. `versions/spm.yaml`
+  for `projects/spm.md`) to add a Compare / Generations section to that project page.
+  `categories` are the rows, `versions` are the columns (oldest first). See `versions/spm.yaml`
+  for a commented example. Images go in `public/projects/<project-id>/`.
+
 ## Local preview
 
 ```bash

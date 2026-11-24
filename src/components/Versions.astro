@@ -1,0 +1,208 @@
+---
+// Design iterations: a "Compare" view (versions side by side, oldest → newest)
+// and a "Generations" view (each version on its own, newest first).
+// Data comes from src/content/versions/<project-id>.yaml.
+import type { CollectionEntry } from 'astro:content';
+import Media from './Media.astro';
+
+interface Props {
+  data: CollectionEntry<'versions'>['data'];
+}
+const { data } = Astro.props;
+const { categories, versions } = data;
+
+type Details = { images: string[]; specs: Record<string, string>; notes?: string };
+const details = (v: (typeof versions)[number], catId: string) =>
+  (v as unknown as Record<string, Details | undefined>)[catId];
+
+const anchor = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+// Shared names let the browser animate each image between the two views.
+const vt = (vi: number, catId: string, i: number) => `view-transition-name: vt-${vi}-${catId}-${i}`;
+
+const newestFirst = versions.map((v, i) => ({ v, i })).reverse();
+const cols = `--cols: ${versions.length}`;
+---
+<section class="versions" data-versions data-mode="compare">
+  <h2 class="versions-title">{data.title}</h2>
+
+  <div class="mode-toggle" role="group" aria-label="View">
+    <button type="button" data-mode-btn="compare" aria-pressed="true">Compare</button>
+    <button type="button" data-mode-btn="generations" aria-pressed="false">Generations</button>
+  </div>
+
+  <!-- Compare: one section per category, one column per version -->
+  <div class="compare" data-view="compare" style={cols}>
+    <div class="compare-scroll">
+      <div class="compare-head">
+        <div class="cell label"></div>
+        {versions.map((v) => (
+          <div class="cell">
+            <a href={`#${anchor(v.name)}`} data-jump class="vname">{v.name}</a>
+            {v.label && <span class="vlabel">{v.label}</span>}
+          </div>
+        ))}
+      </div>
+
+      {categories.map((cat) => (
+        <div class="compare-cat">
+          <h3 class="cat-title">{cat.title}</h3>
+          <div class="row images-row">
+            <div class="cell label"></div>
+            {versions.map((v, vi) => (
+              <div class="cell">
+                <span class="cell-vname">{v.name}</span>
+                {(details(v, cat.id)?.images ?? []).map((src, i) => (
+                  <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
+                ))}
+              </div>
+            ))}
+          </div>
+          {cat.specs.map((spec) => (
+            <div class="row">
+              <div class="cell label">{spec}</div>
+              {versions.map((v, vi) => {
+                const val = details(v, cat.id)?.specs[spec];
+                const prev = vi > 0 ? details(versions[vi - 1], cat.id)?.specs[spec] : undefined;
+                const changed = vi > 0 && val && val !== prev;
+                return <div class:list={['cell', { changed, empty: !val }]}>{val ?? '—'}</div>;
+              })}
+            </div>
+          ))}
+          {versions.some((v) => details(v, cat.id)?.notes) && (
+            <div class="row">
+              <div class="cell label">Notes</div>
+              {versions.map((v) => <div class="cell notes">{details(v, cat.id)?.notes ?? ''}</div>)}
+            </div>
+          )}
+        </div>
+      ))}
+
+      <div class="compare-cat">
+        <h3 class="cat-title">Improvements</h3>
+        <div class="row">
+          <div class="cell label"></div>
+          {versions.map((v, vi) => (
+            <div class="cell">
+              {v.improvements.length > 0 ? (
+                <ul class="improvements">{v.improvements.map((x) => <li>{x}</li>)}</ul>
+              ) : (
+                <span class="empty">{vi === 0 ? 'Baseline' : '—'}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generations: newest first, with sticky jump links -->
+  <div class="generations" data-view="generations" hidden>
+    <nav class="gen-nav" aria-label="Versions">
+      {newestFirst.map(({ v }) => <a href={`#${anchor(v.name)}`} data-jump>{v.name}</a>)}
+    </nav>
+    {newestFirst.map(({ v, i: vi }) => (
+      <article class="generation" id={anchor(v.name)}>
+        <h3>
+          {v.name}{v.label && <span class="gen-label"> — {v.label}</span>}
+          {v.status && <span class="status">{v.status}</span>}
+        </h3>
+        {v.date && <p class="meta">{v.date}</p>}
+        {v.summary && <p>{v.summary}</p>}
+        {v.links.length > 0 && (
+          <p class="links">{v.links.map((l) => <a href={l.href}>{l.label}</a>)}</p>
+        )}
+        {v.improvements.length > 0 && (
+          <>
+            <h4>Improvements over {versions[vi - 1]?.name ?? 'previous'}</h4>
+            <ul class="improvements">{v.improvements.map((x) => <li>{x}</li>)}</ul>
+          </>
+        )}
+        {categories.map((cat) => {
+          const d = details(v, cat.id);
+          if (!d) return null;
+          const specs = cat.specs.filter((s) => d.specs[s]);
+          return (
+            <section class="gen-cat">
+              <h4>{cat.title}</h4>
+              {d.images.map((src, i) => (
+                <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
+              ))}
+              {specs.length > 0 && (
+                <dl class="specs">
+                  {specs.map((s) => (
+                    <>
+                      <dt>{s}</dt>
+                      <dd>{d.specs[s]}</dd>
+                    </>
+                  ))}
+                </dl>
+              )}
+              {d.notes && <p class="notes">{d.notes}</p>}
+            </section>
+          );
+        })}
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-versions]')) {
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-mode-btn]');
+    const views = root.querySelectorAll<HTMLElement>('[data-view]');
+
+    const apply = (mode: string) => {
+      root.dataset.mode = mode;
+      views.forEach((v) => (v.hidden = v.dataset.view !== mode));
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.modeBtn === mode)));
+    };
+
+    // Switch views, animating images between their two positions where supported.
+    const setMode = (mode: string, after?: () => void) => {
+      if (root.dataset.mode === mode) return after?.();
+      const update = () => {
+        apply(mode);
+        after?.();
+      };
+      if (document.startViewTransition && !reduceMotion.matches) {
+        document.startViewTransition(update);
+      } else {
+        update();
+      }
+    };
+
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        const top = root.getBoundingClientRect().top;
+        setMode(b.dataset.modeBtn!, () => {
+          // Keep the toggle where it was on screen instead of jumping.
+          window.scrollBy(0, root.getBoundingClientRect().top - top);
+        });
+      }),
+    );
+
+    // Version links (column headers, sticky nav) open Generations at that version.
+    root.querySelectorAll<HTMLAnchorElement>('[data-jump]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        const target = root.querySelector<HTMLElement>(a.hash);
+        if (!target) return;
+        e.preventDefault();
+        history.replaceState(null, '', a.hash);
+        const scroll = () =>
+          target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+        if (root.dataset.mode === 'generations') scroll();
+        else setMode('generations', () => target.scrollIntoView());
+      }),
+    );
+
+    // Arriving with a version in the URL (e.g. /projects/spm/#v2) opens that version.
+    const id = decodeURIComponent(location.hash.slice(1));
+    const start = id ? root.querySelector<HTMLElement>(`[id="${CSS.escape(id)}"]`) : null;
+    if (start) {
+      apply('generations');
+      start.scrollIntoView();
+    }
+  }
+</script>

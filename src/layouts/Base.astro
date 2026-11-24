@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../site';
+import Lightbox from '../components/Lightbox.astro';
 
 interface Props {
   title?: string;
@@ -24,6 +25,7 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
     <main>
       <slot />
     </main>
+    <Lightbox />
     <footer>© {new Date().getFullYear()} {site.name}</footer>
   </body>
 </html>

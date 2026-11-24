@@ -4,6 +4,8 @@ summary: Coaxial 3-RRR Spherical Parallel Manipulator (SPM) for Compact Spherica
 date: Jun. 2025 -- Present
 tags: [Robotics, Mechanical Design, Control]
 thumbnail: /projects/spm/circle_rot.mp4
+hero: [/projects/spm/poster.svg, /projects/spm/figure.svg]
+heroCaption: V2, presented at IROS 2026 (Late-Breaking Result)
 featured: true
 achievements: 
   - IROS Late-Breaking Result (2026)

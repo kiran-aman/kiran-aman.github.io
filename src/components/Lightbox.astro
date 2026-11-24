@@ -1,0 +1,37 @@
+---
+// Click any image marked data-zoom (or any image in a write-up) to see it full size.
+---
+<dialog class="lightbox" data-lightbox aria-label="Enlarged image">
+  <button type="button" class="lightbox-close" aria-label="Close">×</button>
+  <div class="lightbox-body" data-lightbox-body></div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+  const body = dialog.querySelector<HTMLElement>('[data-lightbox-body]')!;
+
+  document.addEventListener('click', (e) => {
+    const el = (e.target as HTMLElement).closest<HTMLImageElement | HTMLVideoElement>(
+      'img[data-zoom], video[data-zoom], .prose img',
+    );
+    if (!el || el.closest('a')) return;
+    const copy = el.cloneNode() as HTMLImageElement | HTMLVideoElement;
+    copy.removeAttribute('style');
+    copy.removeAttribute('loading');
+    copy.removeAttribute('data-zoom');
+    if (copy instanceof HTMLVideoElement) {
+      copy.controls = true;
+      copy.autoplay = true;
+    }
+    body.replaceChildren(copy);
+    dialog.showModal();
+  });
+
+  // Close on the × button, a click outside the image, or Esc (built in).
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog || e.target === body || (e.target as HTMLElement).closest('.lightbox-close')) {
+      dialog.close();
+    }
+  });
+  dialog.addEventListener('close', () => body.replaceChildren());
+</script>
