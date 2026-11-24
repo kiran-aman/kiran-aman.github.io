@@ -27,7 +27,7 @@ categories:
     specs: [Functionality, Parameters, Slop]
     notes:
       - "* α1, α2, β are the three parameters defining motion of the end effector platform (see [kinematic diagram](#kinematic-diagram){.zoom}))"
-      - "† I define slop as the amount of axial play, when statically held by actuators, of the end effector platform when perturbed with my index finger"
+      - "† I define slop as the amount of axial play, when statically held by actuators, of the end effector platform when perturbed with my index finger approximately that much"
   - id: manufacturing
     title: Manufacturing method
     specs: [Method]

@@ -43,6 +43,16 @@ This SPM-SIP system allows the tasks of **locomotion** and **stabilization** to 
 
 Thus, the end goal of this project is to mount the SPM-SIP system to a mobile robot and send it on its way, given we are able to **validate** it in simulation and controlled real-world environments. 
 
+<details>
+<summary><h2>Machining log (for V2)</h2></summary>
+
+I tracked all of my machining hours that went into creating V2; it totaled 156 hours and 56 attempts at making parts. I also tracked why each part failed for future learning purposes
+
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSogOlJhVCxmWi9l9o4Zn7HpumaKGq5LB4hsbmgHas4wL_IaJWSYyo7WeXSTiJ9JVJ7V5lLIBf1UPsw/pubhtml?gid=0&amp;single=true&amp;headers=false"></iframe>
+
+[**see the full log in google sheets**](https://docs.google.com/spreadsheets/d/e/2PACX-1vSogOlJhVCxmWi9l9o4Zn7HpumaKGq5LB4hsbmgHas4wL_IaJWSYyo7WeXSTiJ9JVJ7V5lLIBf1UPsw/pubhtml)
+
+</details>
 
 <details>
 <summary><h2>How it works</h2></summary>
@@ -79,7 +89,6 @@ which is the full, coupled SPM-SIP model.
 <details>
 <summary><h2>What I learned</h2></summary>
 
-
-Challenges, tradeoffs, what you'd do differently.
+I applied for 3 grants over the course of this project, and I've only been awarded 1 of them. Funding was sort of always a struggle with this project, especially given that it started as completely independent. After being rejected funding to continue V2, I decided to self fund the entire project other than machining services, which truly would have broken the bank. So I just machined all the parts myself (see machining log) and bought the hardware/materials I'd need.
 
 </details>
