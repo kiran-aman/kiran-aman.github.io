@@ -7,7 +7,6 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    // Used for sorting (newest first). Any date format like 2026-05 works.
     date: z.coerce.string(),
     tags: z.array(z.string()).default([]),
     // Path to a file in public/, e.g. /projects/rover/thumb.gif (png, jpg, gif, mp4, webm).
@@ -23,6 +22,7 @@ const projects = defineCollection({
       })
       .default({}),
     draft: z.boolean().default(false),
+    order: z.number().default(0)
   }),
 });
 
