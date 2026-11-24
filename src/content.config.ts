@@ -35,7 +35,8 @@ const projects = defineCollection({
 const categoryDetails = z.object({
   images: z.array(z.string()).default([]),
   specs: z.record(z.string(), z.coerce.string()).default({}),
-  notes: z.string().optional(),
+  // One string or a list (one per line).
+  notes: z.union([z.string(), z.array(z.string())]).optional(),
 });
 
 const versions = defineCollection({

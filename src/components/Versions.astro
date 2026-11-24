@@ -11,7 +11,8 @@ interface Props {
 const { data } = Astro.props;
 const { categories, versions } = data;
 
-type Details = { images: string[]; specs: Record<string, string>; notes?: string };
+type Details = { images: string[]; specs: Record<string, string>; notes?: string | string[] };
+const lines = (n?: string | string[]) => (n ? [n].flat() : []);
 const details = (v: (typeof versions)[number], catId: string) =>
   (v as unknown as Record<string, Details | undefined>)[catId];
 
@@ -73,7 +74,9 @@ const cols = `--cols: ${versions.length}`;
           {versions.some((v) => details(v, cat.id)?.notes) && (
             <div class="row">
               <div class="cell label">Notes</div>
-              {versions.map((v) => <div class="cell notes">{details(v, cat.id)?.notes ?? ''}</div>)}
+              {versions.map((v) => (
+                <div class="cell notes">{lines(details(v, cat.id)?.notes).map((n) => <p>{n}</p>)}</div>
+              ))}
             </div>
           )}
           {footnotes(cat).length > 0 && (
@@ -142,7 +145,7 @@ const cols = `--cols: ${versions.length}`;
                   ))}
                 </dl>
               )}
-              {d.notes && <p class="notes">{d.notes}</p>}
+              {lines(d.notes).map((n) => <p class="notes">{n}</p>)}
               {footnotes(cat).length > 0 && (
                 <div class="cat-notes">{footnotes(cat).map((n) => <p>{n}</p>)}</div>
               )}

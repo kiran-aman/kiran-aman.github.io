@@ -237,6 +237,8 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
 .cell.changed { font-weight: 600; }
 .cell.empty, .empty { color: var(--muted); }
 .cell.notes { color: var(--muted); font-size: 0.85rem; }
+.cell.notes p { margin: 0 0 2px; }
+.gen-cat .notes { color: var(--muted); font-size: 0.9rem; margin: 4px 0; }
 .cell-vname { display: none; }
 .cat-notes { margin: 8px 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
 .cat-notes p { margin: 0 0 2px; }
