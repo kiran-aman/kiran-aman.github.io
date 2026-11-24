@@ -20,7 +20,7 @@ categories:
     title: Drivetrain design
     specs: [Drive type, Backlash, Reduction, Torque, Max speed]
     notes:
-      - "* Placeholder footnote, e.g. measured at the output shaft"
+      - "* backlash across all versions is measured down the entire driveshaft from the actuator to the end effector"
       - "† Placeholder footnote, e.g. estimated from CAD"
   - id: platform
     title: End effector platform
@@ -38,12 +38,13 @@ categories:
 versions:
   - name: V1
     label: Spur gear drive
-    date: "2025"
+    date: "Jun. 2025 -- Jan. 2026"
     summary: Placeholder — one or two sentences on V1.
     drivetrain:
-      images: [/projects/spm/v1/drivetrain-1.svg, /projects/spm/v1/drivetrain-2.svg]
+      images: [/projects/spm/v1/spmv1.png, /projects/spm/v1/drivetrain-2.svg]
       specs:
         Drive type: Spur gears
+        Backlash: "~2.5° *"
     platform:
       images: [/projects/spm/v1/platform-1.svg]
     manufacturing:
@@ -55,13 +56,13 @@ versions:
 
   - name: V2
     label: Belt drive
-    date: "2026"
+    date: "Feb. 2026 -- Aug. 2026"
     status: Presented at IROS 2026
     summary: Placeholder — one or two sentences on V2.
     improvements:
       - Placeholder — what V2 improved over V1
     drivetrain:
-      images: [/projects/spm/v2/drivetrain-1.svg, /projects/spm/v2/drivetrain-2.svg]
+      images: [/projects/spm/v2/spmv2.png, /projects/spm/v2/drivetrain-2.svg]
       specs:
         Drive type: Timing belt
     platform:
@@ -75,7 +76,7 @@ versions:
 
   - name: V3
     label: Direct drive
-    date: "2026 – Present"
+    date: "Sep. 2026 –- Present"
     status: In development
     summary: Placeholder — one or two sentences on V3.
     improvements:

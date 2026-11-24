@@ -251,8 +251,6 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
 .cell.notes p { margin: 0 0 2px; }
 .gen-cat .notes { color: var(--muted); font-size: 0.9rem; margin: 4px 0; }
 .cell-vname { display: none; }
-.cat-notes { margin: 8px 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
-.cat-notes p { margin: 0 0 2px; }
 .improvements { margin: 0; padding-left: 1.1em; }
 .improvements li::marker { content: '+ '; color: var(--muted); }
 
@@ -271,8 +269,6 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
   .compare-head, .compare-cat { width: max-content; }
   .cat-title { position: sticky; left: 0; width: max-content; }
   .cell-vname { display: block; font-weight: 600; font-size: 0.8rem; }
-  /* Keep footnotes screen-width and in view while columns scroll */
-  .compare .cat-notes { position: sticky; left: 0; width: calc(100vw - 40px); }
 }
 
 /* Generations view */
