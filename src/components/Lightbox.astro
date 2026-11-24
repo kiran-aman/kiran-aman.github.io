@@ -9,23 +9,69 @@
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
   const body = dialog.querySelector<HTMLElement>('[data-lightbox-body]')!;
+  const isVideo = (src: string) => /\.(mp4|webm)(\?|#|$)/i.test(src);
+
+  const show = (media: HTMLImageElement | HTMLVideoElement) => {
+    media.removeAttribute('style');
+    media.removeAttribute('loading');
+    media.removeAttribute('data-zoom');
+    media.removeAttribute('id');
+    media.removeAttribute('class');
+    if (media instanceof HTMLVideoElement) {
+      media.controls = true;
+      media.autoplay = true;
+      media.loop = true;
+      media.muted = true;
+      media.playsInline = true;
+    }
+    body.replaceChildren(media);
+    dialog.showModal();
+  };
+
+  // Open a file path, or the image/video inside an element on the page.
+  const showSrc = (src: string, alt = '') => {
+    const media = isVideo(src) ? document.createElement('video') : document.createElement('img');
+    media.src = src;
+    if (media instanceof HTMLImageElement) media.alt = alt;
+    show(media);
+  };
+  const showTarget = (id: string) => {
+    const target = document.getElementById(id);
+    const media = target?.matches('img, video') ? target : target?.querySelector('img, video');
+    if (media) show(media.cloneNode() as HTMLImageElement | HTMLVideoElement);
+  };
+
+  // Jumping to something inside a collapsed section: open the section first.
+  const reveal = (id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    for (let d = target.closest('details'); d; d = d.parentElement?.closest('details') ?? null) d.open = true;
+  };
 
   document.addEventListener('click', (e) => {
-    const el = (e.target as HTMLElement).closest<HTMLImageElement | HTMLVideoElement>(
-      'img[data-zoom], video[data-zoom], .prose img',
-    );
-    if (!el || el.closest('a')) return;
-    const copy = el.cloneNode() as HTMLImageElement | HTMLVideoElement;
-    copy.removeAttribute('style');
-    copy.removeAttribute('loading');
-    copy.removeAttribute('data-zoom');
-    if (copy instanceof HTMLVideoElement) {
-      copy.controls = true;
-      copy.autoplay = true;
+    const t = e.target as HTMLElement;
+
+    // [text](#fig-id){.zoom} or [text](/path/to/file.jpg){.zoom}: pop the figure open.
+    const zoomLink = t.closest<HTMLAnchorElement>('a.zoom');
+    if (zoomLink) {
+      e.preventDefault();
+      const href = zoomLink.getAttribute('href') ?? '';
+      if (href.startsWith('#')) showTarget(decodeURIComponent(href.slice(1)));
+      else showSrc(href, zoomLink.textContent ?? '');
+      return;
     }
-    body.replaceChildren(copy);
-    dialog.showModal();
+
+    // [text](#fig-id): plain jump link (the browser scrolls; we expand collapsed sections).
+    const jump = t.closest<HTMLAnchorElement>('a[href^="#"]:not([data-jump])');
+    if (jump) reveal(decodeURIComponent(jump.hash.slice(1)));
+
+    // Clicking a figure itself.
+    const el = t.closest<HTMLImageElement | HTMLVideoElement>('img[data-zoom], video[data-zoom], .prose img');
+    if (!el || el.closest('a')) return;
+    show(el.cloneNode() as HTMLImageElement | HTMLVideoElement);
   });
+
+  if (location.hash) reveal(decodeURIComponent(location.hash.slice(1)));
 
   // Close on the × button, a click outside the image, or Esc (built in).
   dialog.addEventListener('click', (e) => {

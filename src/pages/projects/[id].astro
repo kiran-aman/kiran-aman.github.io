@@ -49,10 +49,10 @@ const linkList = [
           {heroList.map((item, i) =>
             Array.isArray(item) ? (
               <div class="hero-stack">
-                {item.map((src, j) => <Media src={src} alt={`${title} ${i + 1}.${j + 1}`} data-zoom />)}
+                {item.map((src, j) => <Media src={src} alt={`${title} ${i + 1}.${j + 1}`} id={`hero-${i + 1}-${j + 1}`} data-zoom />)}
               </div>
             ) : (
-              <Media src={item} alt={`${title} ${i + 1}`} data-zoom />
+              <Media src={item} alt={`${title} ${i + 1}`} id={`hero-${i + 1}`} data-zoom />
             ),
           )}
         </div>

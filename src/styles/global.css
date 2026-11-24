@@ -366,3 +366,12 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
 .prose summary::after { content: 'Show'; color: var(--link); font-size: 0.85rem; }
 .prose details[open] > summary::after { content: 'Hide'; }
 .prose details[open] { padding-bottom: 12px; }
+
+/* Jump-link targets: leave room above, and flash an outline on arrival */
+.project-page [id] { scroll-margin-top: 24px; }
+.project-page :target { animation: target-flash 1.6s ease-out; }
+@keyframes target-flash {
+  0%, 40% { outline: 3px solid var(--link); outline-offset: 4px; }
+  100% { outline: 3px solid transparent; outline-offset: 4px; }
+}
+a.zoom { cursor: zoom-in; }
