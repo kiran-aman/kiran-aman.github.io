@@ -19,6 +19,8 @@ const anchor = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 // Shared names let the browser animate each image between the two views.
 const vt = (vi: number, catId: string, i: number) => `view-transition-name: vt-${vi}-${catId}-${i}`;
 
+const footnotes = (cat: (typeof categories)[number]) => (cat.notes ? [cat.notes].flat() : []);
+
 const newestFirst = versions.map((v, i) => ({ v, i })).reverse();
 const cols = `--cols: ${versions.length}`;
 ---
@@ -73,6 +75,9 @@ const cols = `--cols: ${versions.length}`;
               <div class="cell label">Notes</div>
               {versions.map((v) => <div class="cell notes">{details(v, cat.id)?.notes ?? ''}</div>)}
             </div>
+          )}
+          {footnotes(cat).length > 0 && (
+            <div class="cat-notes">{footnotes(cat).map((n) => <p>{n}</p>)}</div>
           )}
         </div>
       ))}
@@ -138,6 +143,9 @@ const cols = `--cols: ${versions.length}`;
                 </dl>
               )}
               {d.notes && <p class="notes">{d.notes}</p>}
+              {footnotes(cat).length > 0 && (
+                <div class="cat-notes">{footnotes(cat).map((n) => <p>{n}</p>)}</div>
+              )}
             </section>
           );
         })}

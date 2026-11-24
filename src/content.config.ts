@@ -49,6 +49,8 @@ const versions = defineCollection({
           id: z.string().regex(/^[a-z0-9-]+$/, 'use lowercase letters, numbers and dashes'),
           title: z.string(),
           specs: z.array(z.string()).default([]),
+          // Footnotes shown full width under this category. One string or a list (one per line).
+          notes: z.union([z.string(), z.array(z.string())]).optional(),
         }),
       ),
       // Columns of the comparison, oldest first.

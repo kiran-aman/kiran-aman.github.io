@@ -3,6 +3,8 @@
 # categories = rows of the comparison. Add, remove or reorder freely.
 #   id:    short name used below (lowercase, dashes)
 #   specs: the spec rows shown for that category
+#   notes: footnotes shown full width under the category (one line, or a list)
+#          Quote any note starting with * or other symbols: "* Measured at no load"
 #
 # versions = columns, OLDEST FIRST. Add a new version at the bottom.
 #   Under each version, use a category id as a key with any of:
@@ -17,6 +19,9 @@ categories:
   - id: drivetrain
     title: Drivetrain design
     specs: [Drive type, Backlash, Reduction, Torque, Max speed]
+    notes:
+      - "* Placeholder footnote, e.g. measured at the output shaft"
+      - "† Placeholder footnote, e.g. estimated from CAD"
   - id: platform
     title: End effector platform
     specs: [Functionality, Parameters, Slop]
@@ -80,7 +85,7 @@ versions:
       images: [/projects/spm/v3/drivetrain-1.svg, /projects/spm/v3/drivetrain-2.svg]
       specs:
         Drive type: Direct drive
-        Backlash: None
+        Backlash: "None*"
     platform:
       images: [/projects/spm/v3/platform-1.svg]
     manufacturing:

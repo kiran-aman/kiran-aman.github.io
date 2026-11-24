@@ -30,7 +30,8 @@ by `.github/workflows/deploy.yml` on every push to `main`.
 - **Design iterations:** create `src/content/versions/<project-id>.yaml` (e.g. `versions/spm.yaml`
   for `projects/spm.md`) to add a Compare / Generations section to that project page.
   `categories` are the rows, `versions` are the columns (oldest first). See `versions/spm.yaml`
-  for a commented example. Images go in `public/projects/<project-id>/`.
+  for a commented example. A category can have `notes:` (full-width footnotes, e.g. for `*` or `†`
+  markers in spec values). Images go in `public/projects/<project-id>/`.
 
 ## Local preview
 
