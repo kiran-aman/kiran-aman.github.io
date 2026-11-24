@@ -68,7 +68,7 @@ const categoryLabel: Record<string, string> = {
             {p.links.map((l) => <a href={l.href}>{l.label}</a>)}
           </p>
         )}
-        {p.summary && <p class="part-summary" set:html={md(p.summary)} />}
+        {p.summary && <div class="part-summary" set:html={md(p.summary)} />}
         {p.skills.length > 0 && <p class="part-meta"><span>Skills:</span> {p.skills.join(', ')}</p>}
         {meta(p).length > 0 && <p class="part-meta">{meta(p).join(' · ')}</p>}
         {p.story && (
@@ -105,7 +105,7 @@ const categoryLabel: Record<string, string> = {
             {p.category && <span class="status">{categoryLabel[p.category]}</span>}
           </h3>
           {meta(p).length > 0 && <p class="part-meta">{meta(p).join(' · ')}</p>}
-          {p.summary && <p class="part-summary" set:html={md(p.summary)} />}
+          {p.summary && <div class="part-summary" set:html={md(p.summary)} />}
           {p.links.length > 0 && <p class="links">{p.links.map((l) => <a href={l.href}>{l.label}</a>)}</p>}
           {p.story && (
             <div class="story-wrap" data-story>

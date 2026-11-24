@@ -438,7 +438,9 @@ a.zoom { cursor: zoom-in; }
 }
 .part-meta { color: var(--muted); font-size: 0.85rem; margin: 4px 0; }
 .part-meta span { color: var(--text); }
-.part-summary { margin: 6px 0; }
+.part-summary, .version-summary { margin: 6px 0; }
+.part-summary p, .version-summary p { margin: 0 0 8px; }
+.part-summary p:last-child, .version-summary p:last-child { margin-bottom: 0; }
 .photo-soon, .guide-soon {
   display: flex;
   align-items: center;

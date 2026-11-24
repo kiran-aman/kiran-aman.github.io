@@ -116,7 +116,7 @@ const cols = `--cols: ${versions.length}`;
           {v.status && <span class="status">{v.status}</span>}
         </h3>
         {v.date && <p class="meta">{v.date}</p>}
-        {v.summary && <p set:html={md(v.summary)} />}
+        {v.summary && <div class="version-summary" set:html={md(v.summary)} />}
         {v.links.length > 0 && (
           <p class="links">{v.links.map((l) => <a href={l.href}>{l.label}</a>)}</p>
         )}
