@@ -1,0 +1,89 @@
+# Machining page content (shown on /projects/machining/).
+#
+# curriculum: numbered lessons, sorted by `order` (lower first), shown as
+#   [photo] [guide PDF] then the text.
+# gallery: other parts, in a two-column layout, in the order written here.
+#
+# Fields for every part (all optional except name):
+#   name:        Part name
+#   images:      [photo paths in public/]. The first is shown; the rest open with
+#                arrows when it's clicked ("+N" marker). Photos are never cropped.
+#   date:        "Spring 2026"
+#   material:    "6061 aluminum"
+#   machine:     "Manual lathe"
+#   operations:  [Facing, Turning, Knurling]
+#   tolerances:  "±0.005\""          (quote anything with " or :)
+#   summary:     Short description, always visible.
+#   story:       Longer narrative; shows a few lines with "Read more".
+#                Use a | block for several paragraphs (see the example below).
+#   links:       [{ label: Drawing, href: /projects/machining/rook.pdf }]
+#
+# Curriculum only:
+#   order:   number used for sorting
+#   label:   shown instead of the number, e.g. "Spring 2026 · Project 1"
+#   guide:   path to the guide PDF in public/; leave out to show "Guide coming soon"
+#   skills:  [Facing, Parting, Reading drawings]
+#
+# Gallery only:
+#   category: personal | quoted | curriculum | other   (shown as a small label)
+#
+# Text fields support **bold**, *italics*, links, {.zoom} links and $math$.
+
+curriculum:
+  - name: Placeholder lesson
+    order: 1
+    images: [/projects/machining/placeholder-lesson.svg]
+    summary: Placeholder — what students make and why it's first.
+    skills: [Placeholder skill, Another skill]
+    machine: Placeholder machine
+
+  - name: Wobbly Rook
+    order: 4
+    label: "Spring 2026 · Project 1"
+    images:
+      - /projects/machining/wobbly_rook_reflect.jpg
+      - /projects/machining/wobbly_rook.jpg
+    summary: Placeholder — one or two sentences on what students make and learn.
+    skills: [Placeholder skill]
+    material: Placeholder material
+    machine: Placeholder machine
+
+gallery:
+  - name: Placeholder personal part
+    category: personal
+    images:
+      - /projects/machining/placeholder-tall.svg
+      - /projects/machining/placeholder-detail.svg
+      - /projects/machining/placeholder-detail.svg
+    material: 6061 aluminum
+    machine: Manual mill
+    operations: [Facing, Pocketing, Drilling]
+    tolerances: "±0.002\""
+    summary: Placeholder — a one-line description of the part.
+    story: |
+      Placeholder narrative. This is where the "oh boy" story goes: what went wrong,
+      what you tried, and how it turned out. Only the first few lines show until
+      "Read more" is clicked.
+
+      A second paragraph works too. **Bold**, *italics* and links all work here.
+
+      And a third paragraph, to make sure the "Read more" button appears.
+
+  - name: Placeholder part
+    category: personal
+    images: [/projects/machining/placeholder-wide.svg]
+    material: Brass
+    machine: Lathe
+    summary: Placeholder — a part with a single photo and no story.
+
+  - name: Placeholder quoted job
+    category: quoted
+    material: 304 stainless
+    machine: CNC mill
+    tolerances: "±0.001\""
+    summary: Placeholder — quoted work shown without photos until cleared to post.
+
+  - name: Placeholder part
+    category: other
+    images: [/projects/machining/placeholder-square.svg]
+    summary: Placeholder — another part.

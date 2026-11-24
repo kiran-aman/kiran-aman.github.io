@@ -42,6 +42,12 @@ by `.github/workflows/deploy.yml` on every push to `main`.
   for a commented example. A category can have `notes:` (full-width footnotes, e.g. for `*` or `†`
   markers in spec values). Images go in `public/projects/<project-id>/`.
 
+- **Curriculum and parts gallery:** create `src/content/parts/<project-id>.yaml` (see
+  `parts/machining.yaml` for every field, with comments). Curriculum lessons show a photo next to
+  the guide PDF (embedded on desktop, a tap-to-open card on phones) and are sorted by `order`.
+  Gallery parts show in two columns; extra photos open with arrows; long `story` text gets
+  "Read more".
+
 ## Write-up extras
 
 - **Collapsible section** (starts collapsed). Keep the blank lines:

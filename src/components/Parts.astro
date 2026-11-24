@@ -1,0 +1,138 @@
+---
+// Machining page: a numbered Curriculum (photo + guide PDF + description) and a
+// masonry Gallery of parts. Data comes from src/content/parts/<project-id>.yaml.
+import type { CollectionEntry } from 'astro:content';
+import Media from './Media.astro';
+import { inlineMarkdown as md } from '../lib/markdown.mjs';
+
+interface Props {
+  data: CollectionEntry<'parts'>['data'];
+}
+const { curriculum, gallery } = Astro.props.data;
+type Part = (typeof gallery)[number] | (typeof curriculum)[number];
+
+const lessons = [...curriculum].sort((a, b) => a.order - b.order);
+const meta = (p: Part) =>
+  [p.material, p.machine, p.operations.join(', ') || undefined, p.tolerances, p.date].filter(Boolean);
+const categoryLabel: Record<string, string> = {
+  personal: 'Personal',
+  quoted: 'Quoted work',
+  curriculum: 'Curriculum',
+  other: 'Other',
+};
+---
+{lessons.length > 0 && (
+  <section class="curriculum">
+    <h2>Curriculum</h2>
+    {lessons.map((p) => (
+      <article class="lesson">
+        <h3>
+          <span class="lesson-num">{p.label ?? `${p.order}.`}</span> {p.name}
+        </h3>
+        <div class="lesson-media">
+          <div class="part-photo">
+            {p.images.length > 0 ? (
+              <>
+                <Media
+                  src={p.images[0]}
+                  alt={p.name}
+                  data-zoom
+                  data-gallery={JSON.stringify(p.images)}
+                  data-caption={p.name}
+                />
+                {p.images.length > 1 && <span class="more-count">+{p.images.length - 1}</span>}
+              </>
+            ) : (
+              <div class="photo-soon">Photo coming soon</div>
+            )}
+          </div>
+          <div class="lesson-guide">
+            {p.guide ? (
+              <>
+                <iframe class="guide-embed" src={p.guide} title={`${p.name} guide`} loading="lazy" />
+                <a class="guide-card" href={p.guide} target="_blank" rel="noopener">
+                  <span class="guide-icon">PDF</span>
+                  <span>Open the guide</span>
+                </a>
+              </>
+            ) : (
+              <div class="guide-soon">Guide coming soon</div>
+            )}
+          </div>
+        </div>
+        {(p.guide || p.links.length > 0) && (
+          <p class="links">
+            {p.guide && (
+              <a href={p.guide} target="_blank" rel="noopener">Guide (PDF) ↗</a>
+            )}
+            {p.links.map((l) => <a href={l.href}>{l.label}</a>)}
+          </p>
+        )}
+        {p.summary && <p class="part-summary" set:html={md(p.summary)} />}
+        {p.skills.length > 0 && <p class="part-meta"><span>Skills:</span> {p.skills.join(', ')}</p>}
+        {meta(p).length > 0 && <p class="part-meta">{meta(p).join(' · ')}</p>}
+        {p.story && (
+          <div class="story-wrap" data-story>
+            <div class="story" set:html={md(p.story)} />
+            <button type="button" class="read-more" hidden>Read more</button>
+          </div>
+        )}
+      </article>
+    ))}
+  </section>
+)}
+
+{gallery.length > 0 && (
+  <section class="parts-gallery">
+    <h2>Gallery</h2>
+    <div class="masonry">
+      {gallery.map((p) => (
+        <article class="part">
+          {p.images.length > 0 && (
+            <div class="part-photo">
+              <Media
+                src={p.images[0]}
+                alt={p.name}
+                data-zoom
+                data-gallery={JSON.stringify(p.images)}
+                data-caption={p.name}
+              />
+              {p.images.length > 1 && <span class="more-count">+{p.images.length - 1}</span>}
+            </div>
+          )}
+          <h3>
+            {p.name}
+            {p.category && <span class="status">{categoryLabel[p.category]}</span>}
+          </h3>
+          {meta(p).length > 0 && <p class="part-meta">{meta(p).join(' · ')}</p>}
+          {p.summary && <p class="part-summary" set:html={md(p.summary)} />}
+          {p.links.length > 0 && <p class="links">{p.links.map((l) => <a href={l.href}>{l.label}</a>)}</p>}
+          {p.story && (
+            <div class="story-wrap" data-story>
+              <div class="story" set:html={md(p.story)} />
+              <button type="button" class="read-more" hidden>Read more</button>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<script>
+  // "Read more": only shown when the story is actually cut off.
+  for (const wrap of document.querySelectorAll<HTMLElement>('[data-story]')) {
+    const story = wrap.querySelector<HTMLElement>('.story')!;
+    const button = wrap.querySelector<HTMLButtonElement>('.read-more')!;
+    const check = () => {
+      if (wrap.classList.contains('expanded')) return;
+      button.hidden = story.scrollHeight <= story.clientHeight + 2;
+    };
+    check();
+    window.addEventListener('resize', check);
+    button.addEventListener('click', () => {
+      const open = wrap.classList.toggle('expanded');
+      button.textContent = open ? 'Show less' : 'Read more';
+    });
+  }
+</script>

@@ -4,6 +4,7 @@ import 'katex/dist/katex.min.css';
 import Base from '../../layouts/Base.astro';
 import Media from '../../components/Media.astro';
 import Versions from '../../components/Versions.astro';
+import Parts from '../../components/Parts.astro';
 import { site } from '../../site';
 
 export async function getStaticPaths() {
@@ -18,6 +19,8 @@ const { title, summary, tags, date, thumbnail, links, achievements, hero, heroCa
 const heroList = hero ? [hero].flat() : thumbnail ? [thumbnail] : [];
 // Design iterations, if src/content/versions/<id>.yaml exists.
 const versions = (await getCollection('versions')).find((v) => v.id === project.id);
+// Curriculum + gallery, if src/content/parts/<id>.yaml exists.
+const parts = (await getCollection('parts')).find((p) => p.id === project.id);
 const linkList = [
   links.repo && { label: 'Code', href: links.repo },
   links.demo && { label: 'Demo', href: links.demo },
@@ -63,6 +66,7 @@ const linkList = [
       <Content />
     </div>
     {versions && <Versions data={versions.data} />}
+    {parts && <Parts data={parts.data} />}
   </article>
 </Base>
 

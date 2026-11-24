@@ -31,5 +31,8 @@ export function inlineMarkdown(text) {
     features,
     mdastPlugins: [katexPlugin],
   });
-  return html.trim().replace(/^<p>([\s\S]*)<\/p>$/, '$1');
+  const out = html.trim();
+  // Unwrap a single paragraph so it can sit inline; keep several paragraphs as they are.
+  const single = out.match(/^<p>([\s\S]*)<\/p>$/);
+  return single && !single[1].includes('<p>') ? single[1] : out;
 }

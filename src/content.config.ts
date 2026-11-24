@@ -88,4 +88,50 @@ const versions = defineCollection({
     }),
 });
 
-export const collections = { projects, versions };
+// Machining-style parts pages: src/content/parts/<project-id>.yaml
+// (e.g. parts/machining.yaml goes with projects/machining.md).
+const partFields = {
+  name: z.string(),
+  // First image is the one shown; the rest open with arrows in full screen.
+  images: z.array(z.string()).default([]),
+  date: z.coerce.string().optional(),
+  material: z.string().optional(),
+  machine: z.string().optional(),
+  operations: z.array(z.string()).default([]),
+  tolerances: z.coerce.string().optional(),
+  // Short description, always visible.
+  summary: z.string().optional(),
+  // Longer narrative: shows the first few lines with "Read more".
+  story: z.string().optional(),
+  links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+};
+
+const parts = defineCollection({
+  loader: glob({ pattern: '*.{yaml,yml}', base: './src/content/parts' }),
+  schema: z.object({
+    curriculum: z
+      .array(
+        z.object({
+          ...partFields,
+          // Position in the curriculum (lower comes first).
+          order: z.number(),
+          // Shown instead of the number, e.g. "Spring 2026 · Project 1".
+          label: z.string().optional(),
+          // Path to the guide PDF in public/. Leave out to show "Guide coming soon".
+          guide: z.string().optional(),
+          skills: z.array(z.string()).default([]),
+        }),
+      )
+      .default([]),
+    gallery: z
+      .array(
+        z.object({
+          ...partFields,
+          category: z.enum(['personal', 'quoted', 'curriculum', 'other']).optional(),
+        }),
+      )
+      .default([]),
+  }),
+});
+
+export const collections = { projects, versions, parts };

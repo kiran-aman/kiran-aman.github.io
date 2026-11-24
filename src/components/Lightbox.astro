@@ -1,22 +1,34 @@
 ---
-// Click any image marked data-zoom (or any image in a write-up) to see it full size.
+// Full-screen viewer.
+// - Click any image marked data-zoom (or any image in a write-up) to see it full size.
+// - data-gallery='["a.jpg","b.jpg"]' on that image adds arrows to flip through the set,
+//   data-caption adds a caption.
+// - Links: [text](#id){.zoom} or [text](/file.jpg){.zoom} open in the viewer.
 ---
 <dialog class="lightbox" data-lightbox aria-label="Enlarged image">
   <button type="button" class="lightbox-close" aria-label="Close">×</button>
+  <button type="button" class="lightbox-nav prev" aria-label="Previous" hidden>‹</button>
+  <button type="button" class="lightbox-nav next" aria-label="Next" hidden>›</button>
   <div class="lightbox-body" data-lightbox-body></div>
+  <p class="lightbox-caption" data-lightbox-caption hidden></p>
 </dialog>
 
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]')!;
   const body = dialog.querySelector<HTMLElement>('[data-lightbox-body]')!;
+  const caption = dialog.querySelector<HTMLElement>('[data-lightbox-caption]')!;
+  const prev = dialog.querySelector<HTMLButtonElement>('.prev')!;
+  const next = dialog.querySelector<HTMLButtonElement>('.next')!;
   const isVideo = (src: string) => /\.(mp4|webm)(\?|#|$)/i.test(src);
 
-  const show = (media: HTMLImageElement | HTMLVideoElement) => {
-    media.removeAttribute('style');
-    media.removeAttribute('loading');
-    media.removeAttribute('data-zoom');
-    media.removeAttribute('id');
-    media.removeAttribute('class');
+  let set: string[] = [];
+  let index = 0;
+  let label = '';
+
+  const prepare = (media: HTMLImageElement | HTMLVideoElement) => {
+    for (const a of ['style', 'loading', 'data-zoom', 'data-gallery', 'data-caption', 'id', 'class']) {
+      media.removeAttribute(a);
+    }
     if (media instanceof HTMLVideoElement) {
       media.controls = true;
       media.autoplay = true;
@@ -24,21 +36,42 @@
       media.muted = true;
       media.playsInline = true;
     }
-    body.replaceChildren(media);
-    dialog.showModal();
+    return media;
   };
-
-  // Open a file path, or the image/video inside an element on the page.
-  const showSrc = (src: string, alt = '') => {
+  const fromSrc = (src: string, alt = '') => {
     const media = isVideo(src) ? document.createElement('video') : document.createElement('img');
     media.src = src;
     if (media instanceof HTMLImageElement) media.alt = alt;
-    show(media);
+    return prepare(media);
   };
-  const showTarget = (id: string) => {
-    const target = document.getElementById(id);
-    const media = target?.matches('img, video') ? target : target?.querySelector('img, video');
-    if (media) show(media.cloneNode() as HTMLImageElement | HTMLVideoElement);
+
+  const render = (media: HTMLImageElement | HTMLVideoElement) => {
+    body.replaceChildren(media);
+    const many = set.length > 1;
+    prev.hidden = next.hidden = !many;
+    const text = [label, many ? `${index + 1} / ${set.length}` : ''].filter(Boolean).join(' · ');
+    caption.textContent = text;
+    caption.hidden = !text;
+    if (!dialog.open) dialog.showModal();
+  };
+
+  // Open a single element or file (no arrows).
+  const showOne = (media: HTMLImageElement | HTMLVideoElement, text = '') => {
+    set = [];
+    label = text;
+    render(prepare(media));
+  };
+  // Open a set of files at a position (arrows if more than one).
+  const showSet = (srcs: string[], start: number, text = '') => {
+    set = srcs;
+    index = start;
+    label = text;
+    render(fromSrc(set[index], text));
+  };
+  const step = (by: number) => {
+    if (set.length < 2) return;
+    index = (index + by + set.length) % set.length;
+    render(fromSrc(set[index], label));
   };
 
   // Jumping to something inside a collapsed section: open the section first.
@@ -50,14 +83,20 @@
 
   document.addEventListener('click', (e) => {
     const t = e.target as HTMLElement;
+    if (dialog.contains(t)) return;
 
     // [text](#fig-id){.zoom} or [text](/path/to/file.jpg){.zoom}: pop the figure open.
     const zoomLink = t.closest<HTMLAnchorElement>('a.zoom');
     if (zoomLink) {
       e.preventDefault();
       const href = zoomLink.getAttribute('href') ?? '';
-      if (href.startsWith('#')) showTarget(decodeURIComponent(href.slice(1)));
-      else showSrc(href, zoomLink.textContent ?? '');
+      if (href.startsWith('#')) {
+        const target = document.getElementById(decodeURIComponent(href.slice(1)));
+        const media = target?.matches('img, video') ? target : target?.querySelector('img, video');
+        if (media) open(media as HTMLImageElement | HTMLVideoElement);
+      } else {
+        showSet([href], 0, zoomLink.textContent ?? '');
+      }
       return;
     }
 
@@ -68,16 +107,43 @@
     // Clicking a figure itself.
     const el = t.closest<HTMLImageElement | HTMLVideoElement>('img[data-zoom], video[data-zoom], .prose img');
     if (!el || el.closest('a')) return;
-    show(el.cloneNode() as HTMLImageElement | HTMLVideoElement);
+    open(el);
   });
+
+  function open(el: HTMLImageElement | HTMLVideoElement) {
+    const text = el.dataset.caption ?? '';
+    if (el.dataset.gallery) {
+      try {
+        const srcs = JSON.parse(el.dataset.gallery) as string[];
+        if (srcs.length) return showSet(srcs, 0, text);
+      } catch {}
+    }
+    showOne(el.cloneNode() as HTMLImageElement | HTMLVideoElement, text);
+  }
 
   if (location.hash) reveal(decodeURIComponent(location.hash.slice(1)));
 
+  prev.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+
+  // Swipe left/right on touch screens.
+  let startX: number | null = null;
+  dialog.addEventListener('touchstart', (e) => (startX = e.touches[0].clientX), { passive: true });
+  dialog.addEventListener('touchend', (e) => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+    startX = null;
+  });
+
   // Close on the × button, a click outside the image, or Esc (built in).
   dialog.addEventListener('click', (e) => {
-    if (e.target === dialog || e.target === body || (e.target as HTMLElement).closest('.lightbox-close')) {
-      dialog.close();
-    }
+    const t = e.target as HTMLElement;
+    if (t === dialog || t === body || t.closest('.lightbox-close')) dialog.close();
   });
   dialog.addEventListener('close', () => body.replaceChildren());
 </script>
