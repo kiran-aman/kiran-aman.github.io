@@ -5,11 +5,11 @@ date: Jun. 2025 -- Present
 tags: [Robotics, Mechanical Design, Control]
 thumbnail: /projects/spm/circle_rot.mp4
 hero:
-  - /projects/spm/poster.svg
-  - - /projects/spm/hero-1.svg
-    - /projects/spm/hero-2.svg
-    - /projects/spm/hero-3.svg
-heroCaption: V2, presented at IROS 2026 (Late-Breaking Result)
+  - /projects/spm/spm_poster.png
+  - - /projects/spm/off_center_rot.mp4
+    - /projects/spm/hypocycloid.mp4
+    - /projects/spm/circle_rot.mp4
+heroCaption: V2, presented at IROS 2026 (Late-Breaking Result) [left]; Matlab simulations [right]
 featured: true
 achievements: 
   - IROS Late-Breaking Result (2026)
