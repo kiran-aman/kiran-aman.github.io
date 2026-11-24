@@ -16,7 +16,7 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const { title, summary, tags, date, thumbnail, links, achievements, hero, heroCaption } = project.data;
 // Hero: one image or several side by side; falls back to the thumbnail.
-const heroList = hero ? [hero].flat() : thumbnail ? [thumbnail] : [];
+const heroList = hero === false ? [] : hero ? [hero].flat() : thumbnail ? [thumbnail] : [];
 // Design iterations, if src/content/versions/<id>.yaml exists.
 const versions = (await getCollection('versions')).find((v) => v.id === project.id);
 // Curriculum + gallery, if src/content/parts/<id>.yaml exists.

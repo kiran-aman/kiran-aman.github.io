@@ -24,7 +24,7 @@ by `.github/workflows/deploy.yml` on every push to `main`.
 ## Project page extras
 
 - **Hero images:** `hero:` in a project's frontmatter takes one path or a list shown side by side,
-  with an optional `heroCaption:`. Without it, the thumbnail is used. A list inside the list is a
+  with an optional `heroCaption:`. Without it, the thumbnail is used; `hero: false` hides it. A list inside the list is a
   column of square images stacked top to bottom; next to a single image, it's sized to match
   that image's height:
   ```yaml

@@ -13,8 +13,10 @@ const projects = defineCollection({
     thumbnail: z.string().optional(),
     // Big image(s) at the top of the project page. One path, or a list shown side by side.
     // A list inside the list is a column of square (1:1) images stacked top to bottom.
-    // Defaults to the thumbnail when left out.
-    hero: z.union([z.string(), z.array(z.union([z.string(), z.array(z.string())]))]).optional(),
+    // Defaults to the thumbnail when left out; `hero: false` shows no hero.
+    hero: z
+      .union([z.literal(false), z.string(), z.array(z.union([z.string(), z.array(z.string())]))])
+      .optional(),
     heroCaption: z.string().optional(),
     // true = big entry in "Projects"; false = small tile in "Other work".
     featured: z.boolean().default(false),
