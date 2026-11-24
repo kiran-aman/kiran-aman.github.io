@@ -375,3 +375,14 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
   100% { outline: 3px solid transparent; outline-offset: 4px; }
 }
 a.zoom { cursor: zoom-in; }
+
+/* Embedded pages (Google Sheets, Docs, YouTube, ...): full width, framed */
+.prose iframe {
+  display: block;
+  width: 100%;
+  height: 500px;
+  margin: 20px 0;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+}
