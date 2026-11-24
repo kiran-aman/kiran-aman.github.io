@@ -4,6 +4,7 @@
 // Data comes from src/content/versions/<project-id>.yaml.
 import type { CollectionEntry } from 'astro:content';
 import Media from './Media.astro';
+import { inlineMarkdown as md } from '../lib/markdown.mjs';
 
 interface Props {
   data: CollectionEntry<'versions'>['data'];
@@ -67,7 +68,7 @@ const cols = `--cols: ${versions.length}`;
                 const val = details(v, cat.id)?.specs[spec];
                 const prev = vi > 0 ? details(versions[vi - 1], cat.id)?.specs[spec] : undefined;
                 const changed = vi > 0 && val && val !== prev;
-                return <div class:list={['cell', { changed, empty: !val }]}>{val ?? '—'}</div>;
+                return <div class:list={['cell', { changed, empty: !val }]} set:html={val ? md(val) : '—'} />;
               })}
             </div>
           ))}
@@ -75,12 +76,12 @@ const cols = `--cols: ${versions.length}`;
             <div class="row">
               <div class="cell label">Notes</div>
               {versions.map((v) => (
-                <div class="cell notes">{lines(details(v, cat.id)?.notes).map((n) => <p>{n}</p>)}</div>
+                <div class="cell notes">{lines(details(v, cat.id)?.notes).map((n) => <p set:html={md(n)} />)}</div>
               ))}
             </div>
           )}
           {footnotes(cat).length > 0 && (
-            <div class="cat-notes">{footnotes(cat).map((n) => <p>{n}</p>)}</div>
+            <div class="cat-notes">{footnotes(cat).map((n) => <p set:html={md(n)} />)}</div>
           )}
         </div>
       ))}
@@ -92,7 +93,7 @@ const cols = `--cols: ${versions.length}`;
           {versions.map((v, vi) => (
             <div class="cell">
               {v.improvements.length > 0 ? (
-                <ul class="improvements">{v.improvements.map((x) => <li>{x}</li>)}</ul>
+                <ul class="improvements">{v.improvements.map((x) => <li set:html={md(x)} />)}</ul>
               ) : (
                 <span class="empty">{vi === 0 ? 'Baseline' : '—'}</span>
               )}
@@ -115,14 +116,14 @@ const cols = `--cols: ${versions.length}`;
           {v.status && <span class="status">{v.status}</span>}
         </h3>
         {v.date && <p class="meta">{v.date}</p>}
-        {v.summary && <p>{v.summary}</p>}
+        {v.summary && <p set:html={md(v.summary)} />}
         {v.links.length > 0 && (
           <p class="links">{v.links.map((l) => <a href={l.href}>{l.label}</a>)}</p>
         )}
         {v.improvements.length > 0 && (
           <>
             <h4>Improvements over {versions[vi - 1]?.name ?? 'previous'}</h4>
-            <ul class="improvements">{v.improvements.map((x) => <li>{x}</li>)}</ul>
+            <ul class="improvements">{v.improvements.map((x) => <li set:html={md(x)} />)}</ul>
           </>
         )}
         {categories.map((cat) => {
@@ -140,14 +141,14 @@ const cols = `--cols: ${versions.length}`;
                   {specs.map((s) => (
                     <>
                       <dt>{s}</dt>
-                      <dd>{d.specs[s]}</dd>
+                      <dd set:html={md(d.specs[s])} />
                     </>
                   ))}
                 </dl>
               )}
-              {lines(d.notes).map((n) => <p class="notes">{n}</p>)}
+              {lines(d.notes).map((n) => <p class="notes" set:html={md(n)} />)}
               {footnotes(cat).length > 0 && (
-                <div class="cat-notes">{footnotes(cat).map((n) => <p>{n}</p>)}</div>
+                <div class="cat-notes">{footnotes(cat).map((n) => <p set:html={md(n)} />)}</div>
               )}
             </section>
           );
