@@ -553,7 +553,26 @@ a.zoom { cursor: zoom-in; }
   background-position: center;
 }
 .banner:not([style*='--banner-image']) { background-image: none; }
-.banner-logo { height: 56px; width: auto; max-width: 100%; }
+/* The logo is drawn as a single-color shape (mask), so its color follows --logo-color */
+.banner-logo {
+  display: block;
+  max-width: 100%;
+  background-color: var(--logo-color, #fff);
+  -webkit-mask: var(--banner-logo) center / contain no-repeat;
+  mask: var(--banner-logo) center / contain no-repeat;
+}
+.banner-logo img { display: block; height: 56px; width: auto; max-width: 100%; visibility: hidden; }
+/* No background: just the logo, bigger */
+.banner-plain {
+  --logo-color: #cc0000;
+  height: auto;
+  padding: 8px 0;
+  border-radius: 0;
+}
+.banner-plain .banner-logo img { height: 88px; }
+@media (prefers-color-scheme: dark) {
+  .banner-plain { --logo-color: #fff; }
+}
 .banner:not(:has(.banner-text)) { justify-content: center; }
 .banner-text {
   font-size: 1.1rem;
@@ -564,6 +583,7 @@ a.zoom { cursor: zoom-in; }
 }
 @media (max-width: 560px) {
   .banner { height: 76px; padding: 0 16px; gap: 12px; }
-  .banner-logo { height: 36px; }
+  .banner-logo img { height: 36px; }
+  .banner-plain .banner-logo img { height: 52px; }
   .banner-text { font-size: 0.8rem; }
 }

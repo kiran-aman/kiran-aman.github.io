@@ -44,10 +44,14 @@ const linkList = [
     )}
     {banner && (
       <div
-        class="banner"
-        style={`--banner-color: ${banner.color};${banner.image ? ` --banner-image: url('${banner.image}');` : ''}`}
+        class:list={['banner', { 'banner-plain': banner.color === 'none' }]}
+        style={`--banner-color: ${banner.color === 'none' ? 'transparent' : banner.color};${banner.image ? ` --banner-image: url('${banner.image}');` : ''}${banner.logo ? ` --banner-logo: url('${banner.logo}');` : ''}`}
       >
-        {banner.logo && <img class="banner-logo" src={banner.logo} alt={banner.alt} />}
+        {banner.logo && (
+          <span class="banner-logo" role="img" aria-label={banner.alt}>
+            <img src={banner.logo} alt="" />
+          </span>
+        )}
         {banner.text && <span class="banner-text">{banner.text}</span>}
       </div>
     )}

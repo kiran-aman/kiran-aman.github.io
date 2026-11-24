@@ -8,6 +8,7 @@ hero: false
 banner:
   logo: /projects/machining/makerspace-logo-white.svg
   alt: NJIT Makerspace
+  color: none
 featured: true
 order: 1
 ---

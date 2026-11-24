@@ -26,6 +26,8 @@ const projects = defineCollection({
         // What the logo says, for screen readers.
         alt: z.string().default(''),
         text: z.string().optional(),
+        // Background color, or "none" for no background (the logo then shows in
+        // NJIT red in light mode and white in dark mode).
         color: z.string().default('#cc0000'),
         image: z.string().optional(),
       })

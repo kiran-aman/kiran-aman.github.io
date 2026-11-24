@@ -40,7 +40,9 @@ by `.github/workflows/deploy.yml` on every push to `main`.
     logo: /projects/machining/makerspace-logo-white.svg   # white logos work best
     alt: NJIT Makerspace
     text: Optional text on the right
-    color: "#cc0000"                                      # default NJIT red
+    color: "#cc0000"                                      # default NJIT red; "none" = no
+                                                          # background (red logo in light mode,
+                                                          # white in dark mode, larger)
     image: /projects/machining/shop.jpg                   # optional darkened photo instead of color
   ```
 - **Click to enlarge:** hero images, design-iteration images and images in write-ups open full size
