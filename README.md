@@ -42,6 +42,19 @@ by `.github/workflows/deploy.yml` on every push to `main`.
   for a commented example. A category can have `notes:` (full-width footnotes, e.g. for `*` or `†`
   markers in spec values). Images go in `public/projects/<project-id>/`.
 
+## Math
+
+Write LaTeX in any project write-up: `$\tau = J\ddot{\theta}$` inline, or a display equation:
+
+```
+$$
+M(q)\ddot{q} + C(q,\dot{q})\dot{q} + G(q) = \tau
+$$
+```
+
+It's rendered with KaTeX at build time (see `astro.config.mjs`). Math only works in the Markdown
+body, not in frontmatter or the versions YAML.
+
 ## Local preview
 
 ```bash

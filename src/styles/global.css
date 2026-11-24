@@ -325,3 +325,6 @@ img[data-zoom], video[data-zoom], .prose img { cursor: zoom-in; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
 }
+
+/* Math: let wide equations scroll sideways instead of overflowing on phones */
+.prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
