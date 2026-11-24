@@ -34,6 +34,15 @@ by `.github/workflows/deploy.yml` on every push to `main`.
       - /projects/spm/gif-2.mp4
       - /projects/spm/gif-3.mp4
   ```
+- **Banner:** a short full-width strip under the title, e.g. on the machining page:
+  ```yaml
+  banner:
+    logo: /projects/machining/makerspace-logo-white.svg   # white logos work best
+    alt: NJIT Makerspace
+    text: Optional text on the right
+    color: "#cc0000"                                      # default NJIT red
+    image: /projects/machining/shop.jpg                   # optional darkened photo instead of color
+  ```
 - **Click to enlarge:** hero images, design-iteration images and images in write-ups open full size
   when clicked.
 - **Design iterations:** create `src/content/versions/<project-id>.yaml` (e.g. `versions/spm.yaml`

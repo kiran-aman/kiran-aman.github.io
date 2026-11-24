@@ -5,6 +5,9 @@ date: Sep. 2025 -- Present
 tags: [CAD/CAM, Machining, DFM]
 thumbnail: /projects/machining/wobbly_rook_reflect.jpg
 hero: false
+banner:
+  logo: /projects/machining/makerspace-logo-white.svg
+  alt: NJIT Makerspace
 featured: true
 order: 1
 ---

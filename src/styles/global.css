@@ -533,3 +533,37 @@ a.zoom { cursor: zoom-in; }
   color: var(--link);
   cursor: pointer;
 }
+
+/* Project banner: a short strip with a logo, on a color or a darkened photo */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 104px;
+  margin: 16px 0 28px;
+  padding: 0 28px;
+  border-radius: 6px;
+  color: #fff;
+  background-color: var(--banner-color);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    var(--banner-image, linear-gradient(transparent, transparent));
+  background-size: cover;
+  background-position: center;
+}
+.banner:not([style*='--banner-image']) { background-image: none; }
+.banner-logo { height: 56px; width: auto; max-width: 100%; }
+.banner:not(:has(.banner-text)) { justify-content: center; }
+.banner-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: right;
+}
+@media (max-width: 560px) {
+  .banner { height: 76px; padding: 0 16px; gap: 12px; }
+  .banner-logo { height: 36px; }
+  .banner-text { font-size: 0.8rem; }
+}

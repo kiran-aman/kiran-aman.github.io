@@ -18,6 +18,18 @@ const projects = defineCollection({
       .union([z.literal(false), z.string(), z.array(z.union([z.string(), z.array(z.string())]))])
       .optional(),
     heroCaption: z.string().optional(),
+    // Short full-width banner under the title: a logo (white works best), optional text,
+    // on a solid color or a darkened background photo.
+    banner: z
+      .object({
+        logo: z.string().optional(),
+        // What the logo says, for screen readers.
+        alt: z.string().default(''),
+        text: z.string().optional(),
+        color: z.string().default('#cc0000'),
+        image: z.string().optional(),
+      })
+      .optional(),
     // true = big entry in "Projects"; false = small tile in "Other work".
     featured: z.boolean().default(false),
     achievements: z.array(z.string()).default([]),
