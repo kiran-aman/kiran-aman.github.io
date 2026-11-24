@@ -37,7 +37,7 @@ This was accepted and presented at IROS 2026 as a Late-Breaking Result in Pittsb
 
 ## Significance
 
-![Significance figure](/projects/spm/significance.svg){.side}
+![Significance figure](/projects/spm/kinematic_diagram.png){.side}
 
 This SPM-SIP system allows the tasks of **locomotion** and **stabilization** to be separated. Hence, path planning of a mobile robot that mounts the SPM-SIP system can stay smooth without pertubations cauesd by stabilization tasks and vice versa. Separation of these tasks is important for safe locomotion, for example through a crowded street or cluttered ground, where deviations from the planned path caused by stabilization may cause the mobile base to crash.
 
