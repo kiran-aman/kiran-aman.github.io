@@ -1,10 +1,14 @@
 ---
-title: Example Project One
-summary: One sentence on what it is and what makes it interesting.
-date: 2026-10
-tags: [Robotics, C++, ROS]
+title: Compact SPM-SIP Stabilizer
+summary: Coaxial 3-RRR Spherical Parallel Manipulator (SPM) for Compact Spherical Inverted Pendulum (SIP) Stabilization [ONGOING]
+date: 2025-10
+tags: [Robotics, Mechanical Design, Control]
 thumbnail: /projects/example-one/thumb.svg
 featured: true
+achievements: 
+  - IROS 2026 Late-Breaking Result
+  - NJIT Dean's Fund Travel Grant
+  - NJIT URI Phase 1 Seed Grant Finalist
 links:
   repo: https://github.com/kiran-aman
 ---

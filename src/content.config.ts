@@ -16,6 +16,7 @@ const projects = defineCollection({
     thumbnail: z.string().optional(),
     // true = big entry in "Projects"; false = small tile in "Other work".
     featured: z.boolean().default(false),
+    achievements: z.array(z.string()).default([]),
     links: z
       .object({
         repo: z.string().optional(),

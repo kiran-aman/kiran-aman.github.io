@@ -136,4 +136,8 @@ a.tile .tile-title { color: var(--link); }
 }
 .achievements li { margin: 0; }
 .achievements li::marker { color: var(--muted); }
+<<<<<<< HEAD
 .project-page .achievements { margin: 0 0 24px; font-size: 1rem; }
+=======
+.project-page .achievements { margin: 0 0 24px; font-size: 1rem; }
+>>>>>>> 33dbe5f (add spm project to home page)

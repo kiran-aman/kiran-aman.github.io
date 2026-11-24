@@ -28,9 +28,9 @@ const linkList = [
     {linkList.length > 0 && (
       <p class="links">{linkList.map((l) => <a href={l.href}>{l.label}</a>)}</p>
     )}
-    {achievements.length > 0 && (
+    {project.data.achievements.length > 0 && (
       <ul class="achievements">
-        {achievements.map((a) => <li>{a}</li>)}
+        {project.data.achievements.map((a) => <li>{a}</li>)}
       </ul>
     )}
     {thumbnail && <Media class="hero" src={thumbnail} alt={title} />}
