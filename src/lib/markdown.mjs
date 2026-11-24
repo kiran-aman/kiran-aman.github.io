@@ -15,7 +15,8 @@ export const katexPlugin = {
 };
 
 // math: $...$, attributes: {#id .class} after links/images.
-export const features = { math: true, attributes: true };
+// smartPunctuation off: inch marks (0.5"), quotes and -- stay exactly as typed.
+export const features = { math: true, attributes: true, smartPunctuation: false };
 
 /**
  * Render a short piece of Markdown (bold, italics, links, {.zoom}, $math$) to inline HTML.
@@ -27,7 +28,7 @@ export function inlineMarkdown(text) {
     .replace(/^([*+-]|#+)(\s)/, '\\$1$2') // "* note" stays literal, not a list
     .replace(/^(\d+)([.)])(\s)/, '$1\\$2$3'); // "1. note" stays literal
   const { html } = markdownToHtml(source, {
-    features: { ...features, smartPunctuation: false }, // keep inch marks (0.5") and -- as typed
+    features,
     mdastPlugins: [katexPlugin],
   });
   return html.trim().replace(/^<p>([\s\S]*)<\/p>$/, '$1');

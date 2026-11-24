@@ -68,7 +68,7 @@ by `.github/workflows/deploy.yml` on every push to `main`.
   Hero images already have ids: `#hero-1`, and `#hero-2-1`, `#hero-2-2`, ... for a stacked column.
 - **Formatting in the versions YAML:** spec values, notes, summaries and improvements support
   **bold**, *italics*, links (including figure links and `{.zoom}`) and `$math$`. Smart punctuation
-  is off there, so `0.5"` and `--` show exactly as typed.
+  is off everywhere (Markdown and YAML), so `0.5"`, quotes and `--` show exactly as typed.
 
 ## Math
 
