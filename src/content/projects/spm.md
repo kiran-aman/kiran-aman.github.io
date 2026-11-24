@@ -9,7 +9,7 @@ hero:
   - - /projects/spm/off_center_rot.mp4
     - /projects/spm/hypocycloid.mp4
     - /projects/spm/circle_rot.mp4
-heroCaption: V2, presented at IROS 2026 (Late-Breaking Result) [left]; Matlab simulations [right]
+heroCaption: 'V2, presented at IROS 2026 (Late-Breaking Result) [left]; Matlab simulations [right] (from top to bottom: eccentric continuous rotation, 5-point hypocyloid, circle + continuous rotation <- this is also the thumbnail)'
 featured: true
 achievements: 
   - IROS Late-Breaking Result (2026)

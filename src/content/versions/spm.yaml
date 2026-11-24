@@ -21,10 +21,13 @@ categories:
     specs: [Drive type, Backlash, Reduction, Torque, Max speed]
     notes:
       - "* backlash across all versions is measured down the entire driveshaft from the actuator to the end effector"
-      - "† Placeholder footnote, e.g. estimated from CAD"
+      - "† max speed/torque across V1 & V2 measured experimentally at the end effector platform, not the actuator; for steppers, this is the speed at which the stepper starts to skip steps"
   - id: platform
     title: End effector platform
     specs: [Functionality, Parameters, Slop]
+    notes:
+      - "* α1, α2, β are the three parameters defining motion of the end effector platform (see kinematic diagram)"
+      - "† I define slop as the amount of axial play, when statically held, of the end effector platform"
   - id: manufacturing
     title: Manufacturing method
     specs: [Method]
@@ -45,14 +48,29 @@ versions:
       specs:
         Drive type: Spur gears
         Backlash: "~2.5° *"
+        Reduction: 2.78:1 (9T -> 25T)
+        Torque: ~0.2 N·m (~400 RPM) -- 0.3 N·m (low speeds) running torque; 0.33 N·m (holding) †
+        Max speed: ~400 RPM @ 24 V †
     platform:
       images: [/projects/spm/v1/platform-1.svg]
+      specs:
+        Functionality: Static probe
+        Parameters: α1 = 45°, α2 = 69.295°, β = 60° *
+        Slop: "~0.5\" †"
     manufacturing:
       images: [/projects/spm/v1/manufacturing-1.svg]
+      specs:
+        Method: FDM/SLA 3D printed
     controller:
       images: [/projects/spm/v1/controller-1.svg]
+      specs:
+        Motor controllers: TMC2208
+        Microcontroller: ESP32
+        Controller: Position feedforward w/ Matlab generated trajectories
     actuators:
       images: [/projects/spm/v1/actuators-1.svg]
+      specs:
+        Motors: NEMA 11 open-loop stepper (11HS20-0674S)
 
   - name: V2
     label: Belt drive
@@ -60,41 +78,82 @@ versions:
     status: Presented at IROS 2026
     summary: Placeholder — one or two sentences on V2.
     improvements:
-      - Placeholder — what V2 improved over V1
+      - greatly reduce tracking error (~15% -> 4.05% max error over the same trajectory)
+      - fix slop in drivetrain caused by unsupported spur gear shafts with long sleeve Delrin bushings
+      - reduce slop at end effector joints with machined bearing spacers
+      - close the loop on steppers and task-space feedback
+      - swap position feedforward for velocity feedforward + position feedback
+      - implement live inverse kinematics solver + forward kinematics validation
     drivetrain:
       images: [/projects/spm/v2/spmv2.png, /projects/spm/v2/drivetrain-2.svg]
       specs:
         Drive type: Timing belt
+        Backlash: "~0.5°"
+        Reduction: 1.5:1 (40T -> 60T)
+        Torque: ~0.28 N·m (~500 RPM) -- 0.55 N·m (low speeds) running torque; 0.59 N·m holding
+        Max speed: ~500 rpm @ 24 V
     platform:
       images: [/projects/spm/v2/platform-1.svg]
+      specs:
+        Functionality: BNO085 IMU task-space feedback
+        Parameters: α1 = 50°, α2 = 54.566°, β = 70°
+        Slop: "~0.1\""
     manufacturing:
       images: [/projects/spm/v2/manufacturing-1.svg]
+      specs: 
+        Method: FDM 3D printed + manual machined aluminum and stainless steel
     controller:
       images: [/projects/spm/v2/controller-1.svg]
+      specs:
+        Motor controllers: TMC2209
+        Microcontroller: Teensy 4.1
+        Controller: Velocity feedforward + position feedback w/ live IK solver
     actuators:
       images: [/projects/spm/v2/actuators-1.svg]
+      specs:
+        Motors: NEMA 17 closed-loop stepper (17HS15-1504D-E1K)
 
   - name: V3
     label: Direct drive
-    date: "Sep. 2026 –- Present"
+    date: "Sep. 2026 -- Present"
     status: In development
     summary: Placeholder — one or two sentences on V3.
     improvements:
-      - Eliminates backlash
-      - Enables computed torque control
+      - eliminate all backlash from actuators with direct-drive
+      - enable torque control and force feedback with direct-drive
+      - eliminate slop at end effector joints with precision machined bolts and spacers
+      - reduce slop/backlash from drivetrain through more direct mounting and rigidity
+      - optimize end effector platform parameters for workspace size and dexterity
+      - add controller routine to self-rotate when approaching workspace boundaries to avoid singularities
     drivetrain:
       images: [/projects/spm/v3/drivetrain-1.svg, /projects/spm/v3/drivetrain-2.svg]
       specs:
         Drive type: Direct drive
-        Backlash: "None*"
+        Backlash: "0.0°????"
+        Reduction: 1:1
+        Torque: 5.5 N·m continuous, 16 N·m peak
+        Max speed: ~1800 rpm @ 48 V (this value is way higher than other limiting factors)
+      notes: "these are projected backlash/speed values (this prototype is not yet physically realized)"
     platform:
       images: [/projects/spm/v3/platform-1.svg]
+      specs:
+        Functionality: BNO085 IMU task-space feedback + SIP mounting
+        Parameters: α1 = x, α2 = y, β = z
+        Slop: "~0.0000\"!!!"
+      notes: "this is a projected slop value (this prototype is not yet physically realized)"
     manufacturing:
       images: [/projects/spm/v3/manufacturing-1.svg]
       specs:
-        Method: Theoretical — CAM toolpaths
-      notes: Planned manufacturing; shown as CAM rather than finished parts.
+        Method: (soon to be) FDM/SLA 3D printed + CNC/manual machined aluminum and stainless steel
+      notes: some preliminary cam designs (this prototype is not yet physically realized)
     controller:
       images: [/projects/spm/v3/controller-1.svg]
+      specs:
+        Motor controllers: ODrive Pro
+        Microcontroller: Teensy 4.1
+        Microprocessor: Jetson Orin Nano
+        Controller: Computed torque control w/ live IK solver
     actuators:
       images: [/projects/spm/v3/actuators-1.svg]
+      specs:
+        Motors: Direct-drive framless inrunner (RI115-PH KV40)
