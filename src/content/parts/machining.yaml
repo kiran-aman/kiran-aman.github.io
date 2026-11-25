@@ -30,23 +30,95 @@
 # Text fields support **bold**, *italics*, links, {.zoom} links and $math$.
 
 curriculum:
-  - name: Placeholder lesson
+  - name: Lighthouse keychain
     order: 1
-    images: [/projects/machining/placeholder-lesson.svg]
-    summary: Placeholder — what students make and why it's first.
-    skills: [Placeholder skill, Another skill]
-    machine: Placeholder machine
+    label: "Fall 2025 · Project 1.1"
+    images: [/projects/machining/lighthouse_keychain/lighthouse_keychain_shop.jpg]
+    summary: |
+      A mini lighthouse with an optional eye bolt attachment for conversion into a keychain. Logistics of carrying around a 3.5" steel keychain are left as an exercise. Composed of 5 parts: hat, light, bottom, body, base (from top to bottom)
+
+      This was the first project I ever developed after I made a larger lighthouse as a gift (see gallery)
+    skills: [Basic turning, taper attachment, tapping, fixturing w/ 123 block]
+    material: Steel or aluminum, brass
+    machine: Lathe & mill
+
+  - name: Roller dice
+    order: 2
+    label: "Fall 2025 · Project 1.2"
+    images:
+      - /projects/machining/roller_dice/roller_dice_thumb.jpg
+      - /projects/machining/roller_dice/roller_dice_2.jpg
+      - /projects/machining/roller_dice/roller_dice_3.jpg
+    summary: |
+      There is a hexagonal pocket milled* feature on the inside of the rolling exterior so that a steel dowel pin settles into a corner (of the hexagon) when the dice is rolled, landing on one of the faces. Probably a fair dice. Composed of 2 parts: hat, body
+
+      \* the first time I pocket milled this, I accidentally blew all the chips that collected in the pocket into my face with compressed air (I was wearing safeties)
+    skills: [Pocket milling, face milling, fixturing with collet block]
+    material: Aluminum
+    machine: Mostly milling
+
+  - name: Call bell
+    order: 3
+    label: "Fall 2025 · Project 1.3"
+    images:
+      - /projects/machining/call_bell/call_bell_thumb.jpg
+      - /projects/machining/call_bell/call_bell_2.jpg
+      - /projects/machining/call_bell/call_bell_3.jpg
+    summary: |
+      The handle threads onto the top and has geometry that hangs down into the middle of the body, which is thin-walled and hollow. We hang a smaller piece of aluminum via a split-washer chain onto that slot such that when you shake it, the bell rings. Composed of 3 parts: handle, body, hammer
+
+      I filed and sanded this for 7 hours.
+    skills: [Stepping then filing contours, polishing, patience (a skill)]
+    material: Aluminum
+    machine: Lathe & mill
 
   - name: Wobbly Rook
     order: 4
-    label: "Spring 2026 · Project 1"
+    label: "Spring 2026 · Project 2.1"
     images:
-      - /projects/machining/wobbly_rook_reflect.jpg
-      - /projects/machining/wobbly_rook.jpg
-    summary: Placeholder — one or two sentences on what students make and learn.
-    skills: [Placeholder skill]
-    material: Placeholder material
-    machine: Placeholder machine
+      - /projects/machining/wobbly_rook/wobbly_rook_thumb.jpg
+      - /projects/machining/wobbly_rook/wobbly_rook_2.jpg
+      - /projects/machining/wobbly_rook/wobbly_rook_3.jpg
+      - /projects/machining/wobbly_rook/wobbly_rook_4.jpg
+      - /projects/machining/wobbly_rook/wobbly_rook_5.jpg     
+      - /projects/machining/wobbly_rook/wobbly_rook_6.jpg
+    summary: |
+      I designed this rook such that the center of mass of the entire piece is below the center of the steel hemisphere, which creates a restoring force that brings the rook back to its stable upright equilibrium when perturbed; also, since the crown of the rook hits the table before the COM goes above the center of the hemisphere, it is robust to any magnitude of impulse (that does not exceed material failure). Composed of 2 parts: top, bottom
+
+      This is one of my favorites; when I first made it, the COM was too high since I put 8 threads on the steel hemisphere. I had to grind it down so there were no starting threads and only 2, and only then it worked.
+    skills: [Single-point threading, step then filing contours, slot milling, polishing]
+    material: Aluminum and stainless
+    machine: Lathe & mill
+
+  - name: Gimbal
+    order: 5
+    label: "Spring 2026 · Project 2.2"
+    images:
+      - /projects/machining/gimbal/gimbal_thumb.jpg
+      - /projects/machining/gimbal/gimbal_2.jpg
+      - /projects/machining/gimbal/gimbal_3.jpg
+    summary: |
+      Each ring is nested inside one another such that they depict RPY-Euler angles; we can even observe gimbal lock with some configurations. Rings are connected through ball bearings to ensure smooth operation, and an optional weighted arrow can be attached to the innermost ring to turn this into a compass pointing at the nearest celestial body. Composed of 4 or 5 parts: outer, yaw, pitch, roll, (optional) arrow
+
+      This was really annoying to make since I had to keep refixturing to mill a flat then drill a hole two times for each ring. I also had to completely remake this part since I screwed up the design; I'd assumed the rings were perfectly rigid, so when I attached them to each other through the bearings, they would completely deform into an oval and not spin smoothly (I had to add spacers).
+    skills: [Boring, face milling, drilling, fixturing]
+    material: Bronze and aluminum
+    machine: Lathe & mill
+
+  - name: Cube globe
+    order: 6
+    label: "Spring 2026 · Project 2.3"
+    images:
+      - /projects/machining/globe/cube_globe_thumb.jpg
+      - /projects/machining/globe/cube_globe_2.jpg
+      - /projects/machining/globe/cube_globe_3.jpg
+    summary: |
+      The stand and half ring are both made of bronze, while the cube is made of stainless steel. It's attached via screws on the top and bottom of the half ring that fit in bearings, so the cube spins very smoothly. Might not depict Earth in some perspectives (opinions), but it is at a 23.44±10° angle. Composed of 4 parts: cube, half ring, rectangle, base
+
+      I'm actually currently working on a spherical earth with sandblasted continents, if this is still a cube then I'm not done yet. It was a little sketchy when I used 3D printed fixtures (90% infill) to mill the flats and drill holes at the corners of the cube, but it worked well.
+    skills: [Making a cube on the mill, slitting saw, slab milling, 3D printed fixturing]
+    material: Bronze and stainless
+    machine: Lathe & mill
 
 gallery:
   - name: Placeholder personal part
