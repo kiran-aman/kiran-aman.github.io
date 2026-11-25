@@ -97,8 +97,9 @@ curriculum:
       - /projects/machining/gimbal/gimbal_thumb.jpg
       - /projects/machining/gimbal/gimbal_2.jpg
       - /projects/machining/gimbal/gimbal_3.jpg
+      - /projects/machining/gimbal/gimbal_4.jpg
     summary: |
-      Each ring is nested inside one another such that they depict RPY-Euler angles; we can even observe gimbal lock with some configurations. Rings are connected through ball bearings to ensure smooth operation, and an optional weighted arrow can be attached to the innermost ring to turn this into a compass pointing at the nearest celestial body. Composed of 4 or 5 parts: outer, yaw, pitch, roll, (optional) arrow
+      Each ring is nested inside one another such that they depict RPY-Euler angles; we can even observe gimbal lock with some configurations (make this coordinate free next time). Rings are connected through ball bearings to ensure smooth operation, and an optional weighted arrow can be attached to the innermost ring to turn this into a compass pointing at the nearest celestial body. Composed of 4 or 5 parts: outer, yaw, pitch, roll, (optional) arrow
 
       This was really annoying to make since I had to keep refixturing to mill a flat then drill a hole two times for each ring. I also had to completely remake this part since I screwed up the design; I'd assumed the rings were perfectly rigid, so when I attached them to each other through the bearings, they would completely deform into an oval and not spin smoothly (I had to add spacers).
     skills: [Boring, face milling, drilling, fixturing]
@@ -121,41 +122,112 @@ curriculum:
     machine: Lathe & mill
 
 gallery:
-  - name: Placeholder personal part
+  - name: Top
     category: personal
     images:
-      - /projects/machining/placeholder-tall.svg
-      - /projects/machining/placeholder-detail.svg
-      - /projects/machining/placeholder-detail.svg
+      - /projects/machining/top/top.jpg
+      - /projects/machining/top/top_2.jpg
     material: 6061 aluminum
-    machine: Manual mill
-    operations: [Facing, Pocketing, Drilling]
-    tolerances: "±0.002\""
-    summary: Placeholder — a one-line description of the part.
+    machine: Manual lathe
+    operations: [Freehand turning]
+    summary: Dream detection device.
     story: |
-      Placeholder narrative. This is where the "oh boy" story goes: what went wrong,
-      what you tried, and how it turned out. Only the first few lines show until
-      "Read more" is clicked.
+      I'd originally planned to step and file this, but I realized that I didn't want to do that. I tried freehanding it and it came out well, but it turns out that I spent the time polishing it instead.
 
-      A second paragraph works too. **Bold**, *italics* and links all work here.
-
-      And a third paragraph, to make sure the "Read more" button appears.
-
-  - name: Placeholder part
-    category: personal
-    images: [/projects/machining/placeholder-wide.svg]
-    material: Brass
-    machine: Lathe
-    summary: Placeholder — a part with a single photo and no story.
-
-  - name: Placeholder quoted job
-    category: quoted
-    material: 304 stainless
-    machine: CNC mill
-    tolerances: "±0.001\""
-    summary: Placeholder — quoted work shown without photos until cleared to post.
-
-  - name: Placeholder part
+  - name: Grinder arbor
     category: other
-    images: [/projects/machining/placeholder-square.svg]
-    summary: Placeholder — another part.
+    images: 
+      - /projects/machining/grinder_arbor/grinder_arbor_thumb.jpg
+      - /projects/machining/grinder_arbor/grinder_arbor_2.jpg
+      - /projects/machining/grinder_arbor/grinder_arbor_3.jpg
+      - /projects/machining/grinder_arbor/grinder_arbor_4.jpg
+    material: Steel
+    machine: Lathe & mill
+    operations: [Internal threading]
+    summary: |
+      Custom arbor made for a bench grinder at the Makerspace. 1/8" flat head file
+      
+      It has a cap so that grinding particulate doesn't get in and screw up all the threads, and is also tightenable with a spanner wrench
+
+  - name: Big lighthouse
+    category: personal
+    images: [/projects/machining/big_lighthouse/lighthouse_big.jpg]
+    material: Brass, aluminum
+    machine: Lathe
+    summary: Inspiration for the lighthouse keychain (see above); this was the first major machining project I ever did.
+
+  - name: Quoted part (some driveshaft)
+    category: quoted
+    images: [/projects/machining/driveshaft/quoted_job.jpg]
+    material: Aluminum
+    machine: Lathe
+    operations: [Single point threading, turning, polishing]
+    summary: Quoted job I did for the Makerspace for a lab on campus. I think it's a driveshaft
+
+  - name: SPM stepper motor mount
+    category: other
+    images:
+      - /projects/machining/motor_mount/motor_mount_thumb.jpg
+      - /projects/machining/motor_mount/motor_mount_2.jpg
+      - /projects/machining/motor_mount/motor_mount_3.jpg
+      - /projects/machining/motor_mount/motor_mount_4.jpg
+      - /projects/machining/motor_mount/motor_mount_5.jpg
+    material: 6061 aluminum
+    machine: Mill
+    operations: [Boring head, squaring, pocket milling, drilling, tapping]
+    summary: |
+      A NEMA 17 stepper motor mount for my V2 SPM project (I didn't end up using this part)
+
+      I made it because I didn't want to study for my finals. I realized that it would be a much better idea to just 3D print these, since they're not structurally super important and this took me 10 hours.
+
+  - name: SPM cage
+    category: other
+    images:
+      - /projects/machining/cage/cage_thumb.jpg
+      - /projects/machining/cage/cage_2.jpg
+      - /projects/machining/cage/cage_3.jpg
+    material: 6061 aluminum
+    machine: Lathe & mill
+    operations: [Boring head, milling, drilling, tapping, weird fixturing]
+    summary: |
+      A structual 'cage' for the V2 SPM project; holds tensioner platforms, shaft support, and aligns with the central shaft
+
+      I designed this part to be as simple to machine as possible, still took me like 15 hours. Luckily it was 1 attempt. 
+
+  - name: SPM plate(s)
+    category: other
+    images:
+      - /projects/machining/plate/plate_thumb.jpg
+      - /projects/machining/plate/plate_2.jpg
+    material: 6061 aluminum
+    machine: Lathe & mill
+    operations: [Coaxial indicator, drilling, tapping, hex index fixuring]
+    summary: |
+      Two generations of stepper plates for the V2 SPM project; they attach the stepper motors to the cage and align them
+
+      When I redesigned this part, I realized that I should just make everything as big as possible to prevent later headaches. They say premature optimization is the root of all evil
+
+  - name: SPM long shaft
+    category: other
+    images:
+      - /projects/machining/long_shaft/long_shaft_thumb.jpg
+      - /projects/machining/long_shaft/long_shaft_2.jpg
+    material: Stainless
+    machine: Lathe
+    operations: [Sanding, scotchbrite, polishing, steady rest]
+    summary: |
+      Very important central shaft for the V2 SPM; held ±0.002" over the 6" length
+
+      When I got within about 0.010" of the final diameter, I started taking measurements over 5 points along the length and only sanded/scotchbrited the surface. Needless to say it took a while
+
+  - name: SPM shaft 1
+    category: other
+    images:
+      - /projects/machining/dead_shafts/dead_shafts.jpg
+    material: 6061 aluminum
+    machine: Lathe
+    operations: [Sanding, scotchbrite, polishing]
+    summary: |
+      The innermost coaxial shaft in the V2 SPM drivetrain. There was only 1 survivor
+
+      This part, all in all, took 4 attempts over 24 hours to get right. Earlier attempts were particularly catastrophic (see 1 and 2), which happened because I designed the shaft with a very thin wall. (I then redesigned it)
