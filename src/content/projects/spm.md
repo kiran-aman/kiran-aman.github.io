@@ -13,7 +13,7 @@ heroCaption: 'V2, presented at IROS 2026 (Late-Breaking Result) [left]; Matlab s
 featured: true
 achievements: 
   - IROS Late-Breaking Result (2026)
-  - NJIT Dean's Fund Travel Grant (2026)
+  - NJIT Dean's Fund Travel Grant Winner (2026)
   - NJIT URI Phase 1 Seed Grant Finalist (2025)
 links:
   repo: https://github.com/kiran-aman/spm

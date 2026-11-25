@@ -15,4 +15,6 @@ order: 1
 
 ## Overview
 
-Replace this with your write-up.
+The first section (curriculum) are some projects that I've made for interested NJIT students to gain more experience with machining. I try to push out 3 new projects each semester (hence the convention N.M). contact me if you're interested to do one or multiple of these projects, preferably you are an njit student who has taken engr220. 
+
+The second section is a gallery of assorted parts I've worked on, multiple of which are from my machining hardware sprint to create the V2 SPM (see compact SPM-SIP stabilizer).
