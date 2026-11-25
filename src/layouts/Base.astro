@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site } from '../site';
 import Lightbox from '../components/Lightbox.astro';
+import { execSync } from 'node:child_process';
 
 interface Props {
   title?: string;
@@ -9,6 +10,13 @@ interface Props {
 }
 const { title, description = `${site.name} — projects and resume.` } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
+
+// "Last updated": the date of the latest commit (i.e. your last push), or today if git isn't available.
+let updated = new Date();
+try {
+  updated = new Date(execSync('git log -1 --format=%cI', { encoding: 'utf8' }).trim());
+} catch {}
+const updatedText = updated.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 ---
 <!doctype html>
 <html lang="en">
@@ -26,6 +34,6 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
       <slot />
     </main>
     <Lightbox />
-    <footer>© {new Date().getFullYear()} {site.name}</footer>
+    <footer>Last updated {updatedText}</footer>
   </body>
 </html>
