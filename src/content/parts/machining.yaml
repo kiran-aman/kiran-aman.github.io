@@ -34,6 +34,7 @@ curriculum:
     order: 1
     label: "Fall 2025 · Project 1.1"
     images: [/projects/machining/lighthouse_keychain/lighthouse_keychain_shop.jpg]
+    guide: /projects/machining/lighthouse_keychain/lighthouse_keychain_drawing.pdf
     summary: |
       A mini lighthouse with an optional eye bolt attachment for conversion into a keychain. Logistics of carrying around a 3.5" steel keychain are left as an exercise. Composed of 5 parts: hat, light, bottom, body, base (from top to bottom)
 
@@ -49,6 +50,7 @@ curriculum:
       - /projects/machining/roller_dice/roller_dice_thumb.jpg
       - /projects/machining/roller_dice/roller_dice_2.jpg
       - /projects/machining/roller_dice/roller_dice_3.jpg
+    guide: /projects/machining/roller_dice/roller_dice_drawing.pdf
     summary: |
       There is a hexagonal feature pocket milled* on the inside of the rolling exterior so that a steel dowel pin settles into a corner (of the hexagon) when the dice is rolled, landing on one of the faces. Probably a fair dice. Composed of 2 parts: hat, body
 
