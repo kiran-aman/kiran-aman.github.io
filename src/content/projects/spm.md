@@ -55,7 +55,7 @@ I tracked all of my machining hours that went into creating V2; it totaled 156 h
 </details>
 
 <details>
-<summary><h2>How it works</h2></summary>
+<summary><h2>Geometric modeling</h2></summary>
 
 
 The SPM mechanically constrains the end effector (a pivot offset from $o$) to traverse the surface of a sphere about a remote center of rotation. This property is what I believe will allow us to balance an SIP in a **compact** manner; that is, we see that rotation about this remote center creates **necessary translational accelerations** to act on the pendulum such that
