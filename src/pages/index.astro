@@ -61,7 +61,7 @@ const hrefFor = (p: (typeof all)[number]) =>
       <div class="masonry">
         {other.map((p) => {
           const href = hrefFor(p);
-          const media = [p.data.thumbnail, ...p.data.images].filter(Boolean) as string[];
+          const media = [p.data.thumbnail, ...(p.data.images ?? [])].filter(Boolean) as string[];
           const linkList = [
             hasPage(p) && { label: 'Details', href: `/projects/${p.id}/` },
             p.data.links.repo && { label: 'Code', href: p.data.links.repo },
