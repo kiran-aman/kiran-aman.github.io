@@ -50,7 +50,7 @@ curriculum:
       - /projects/machining/roller_dice/roller_dice_2.jpg
       - /projects/machining/roller_dice/roller_dice_3.jpg
     summary: |
-      There is a hexagonal pocket milled* feature on the inside of the rolling exterior so that a steel dowel pin settles into a corner (of the hexagon) when the dice is rolled, landing on one of the faces. Probably a fair dice. Composed of 2 parts: hat, body
+      There is a hexagonal feature pocket milled* on the inside of the rolling exterior so that a steel dowel pin settles into a corner (of the hexagon) when the dice is rolled, landing on one of the faces. Probably a fair dice. Composed of 2 parts: hat, body
 
       \* the first time I pocket milled this, I accidentally blew all the chips that collected in the pocket into my face with compressed air (I was wearing safeties)
     skills: [Pocket milling, face milling, fixturing with collet block]
@@ -85,7 +85,7 @@ curriculum:
     summary: |
       I designed this rook such that the center of mass of the entire piece is below the center of the steel hemisphere, which creates a restoring force that brings the rook back to its stable upright equilibrium when perturbed; also, since the crown of the rook hits the table before the COM goes above the center of the hemisphere, it is robust to any magnitude of impulse (that does not exceed material failure). Composed of 2 parts: top, bottom
 
-      This is one of my favorites; when I first made it, the COM was too high since I put 8 threads on the steel hemisphere. I had to grind it down so there were no starting threads and only 2, and only then it worked.
+      This is one of my favorites; when I first made it, the COM was too high since I put 8 threads on the steel hemisphere. I had to grind it down so there were only 2, and only then it worked.
     skills: [Single-point threading, step then filing contours, slot milling, polishing]
     material: Aluminum and stainless
     machine: Lathe & mill
