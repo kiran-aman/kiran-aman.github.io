@@ -135,6 +135,8 @@ const parts = defineCollection({
           label: z.string().optional(),
           // Path to the guide PDF in public/. Leave out to show "Guide coming soon".
           guide: z.string().optional(),
+          // Page orientation of the guide PDF (sizes its box on the page).
+          guideOrientation: z.enum(['landscape', 'portrait']).default('landscape'),
           skills: z.array(z.string()).default([]),
         }),
       )

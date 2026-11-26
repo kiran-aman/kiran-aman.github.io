@@ -22,6 +22,7 @@
 #   order:   number used for sorting
 #   label:   shown instead of the number, e.g. "Spring 2026 · Project 1"
 #   guide:   path to the guide PDF in public/; leave out to show "Guide coming soon"
+#   guideOrientation: landscape (default) or portrait — match the PDF's pages
 #   skills:  [Facing, Parting, Reading drawings]
 #
 # Gallery only:

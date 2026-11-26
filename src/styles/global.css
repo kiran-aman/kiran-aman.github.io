@@ -589,3 +589,9 @@ a.zoom { cursor: zoom-in; }
   .banner-plain .banner-logo img { height: 52px; }
   .banner-text { font-size: 0.8rem; }
 }
+
+/* Landscape guides (the default): landscape box, and a wider column so drawings are readable */
+.lesson-media.landscape { grid-template-columns: 2fr 3fr; }
+.lesson-media.landscape .guide-embed,
+.lesson-media.landscape .guide-card,
+.lesson-media.landscape .guide-soon { aspect-ratio: 11 / 8.5; }

@@ -12,6 +12,9 @@ const { curriculum, gallery } = Astro.props.data;
 type Part = (typeof gallery)[number] | (typeof curriculum)[number];
 
 const lessons = [...curriculum].sort((a, b) => a.order - b.order);
+// Embedded PDF: fit the page to the box and hide the viewer's toolbar and sidebar
+// (Chrome/Edge read toolbar, navpanes and view; Firefox reads zoom; others ignore them).
+const embedSrc = (pdf: string) => `${pdf}#toolbar=0&navpanes=0&view=Fit&zoom=page-fit`;
 const meta = (p: Part) =>
   [p.material, p.machine, p.operations.join(', ') || undefined, p.tolerances, p.date].filter(Boolean);
 const categoryLabel: Record<string, string> = {
@@ -29,7 +32,7 @@ const categoryLabel: Record<string, string> = {
         <h3>
           <span class="lesson-num">{p.label ?? `${p.order}.`}</span> {p.name}
         </h3>
-        <div class="lesson-media">
+        <div class:list={['lesson-media', p.guideOrientation]}>
           <div class="part-photo">
             {p.images.length > 0 ? (
               <>
@@ -49,7 +52,7 @@ const categoryLabel: Record<string, string> = {
           <div class="lesson-guide">
             {p.guide ? (
               <>
-                <iframe class="guide-embed" src={p.guide} title={`${p.name} guide`} loading="lazy" />
+                <iframe class="guide-embed" src={embedSrc(p.guide)} title={`${p.name} guide`} loading="lazy" />
                 <a class="guide-card" href={p.guide} target="_blank" rel="noopener">
                   <span class="guide-icon">PDF</span>
                   <span>Open the guide</span>
