@@ -7,6 +7,9 @@ by `.github/workflows/deploy.yml` on every push to `main`.
 
 - **Name, intro, header links:** `src/site.ts` (empty links are hidden)
 - **Resume:** put the PDF at `public/resume.pdf`
+- **Other work (home page):** projects without `featured: true` show in a two-column gallery like
+  the machining one. The thumbnail can be a photo, GIF or video; add `images: [...]` for more
+  photos/videos that open with arrows when the thumbnail is clicked.
 - **Add a project:** create `src/content/projects/<slug>.md` and put its images/GIFs in
   `public/projects/<slug>/`. Copy one of the existing files for the frontmatter fields.
   - `featured: true` → large entry under **Projects**; omit it → small tile under **Other work**

@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Media from '../components/Media.astro';
 import { site } from '../site';
+import { inlineMarkdown as md } from '../lib/markdown.mjs';
 
 const year = (s: string) =>
   /present/i.test(s) ? 9999 : Math.max(0, ...(s.match(/\d{4}/g) ?? []).map(Number));
@@ -55,23 +56,42 @@ const hrefFor = (p: (typeof all)[number]) =>
   )}
 
   {other.length > 0 && (
-    <section>
+    <section class="other-work">
       <h2>Other work</h2>
-      <ul class="gallery">
+      <div class="masonry">
         {other.map((p) => {
           const href = hrefFor(p);
-          const Tag = href ? 'a' : 'div';
+          const media = [p.data.thumbnail, ...p.data.images].filter(Boolean) as string[];
+          const linkList = [
+            hasPage(p) && { label: 'Details', href: `/projects/${p.id}/` },
+            p.data.links.repo && { label: 'Code', href: p.data.links.repo },
+            p.data.links.demo && { label: 'Demo', href: p.data.links.demo },
+            p.data.links.paper && { label: 'Paper', href: p.data.links.paper },
+          ].filter(Boolean) as { label: string; href: string }[];
           return (
-            <li>
-              <Tag class="tile" href={href}>
-                <Media src={p.data.thumbnail} alt={p.data.title} />
-                <span class="tile-title">{p.data.title}</span>
-                <span class="meta">{p.data.summary}</span>
-              </Tag>
-            </li>
+            <article class="part">
+              {media.length > 0 && (
+                <div class="part-photo">
+                  <Media
+                    src={media[0]}
+                    alt={p.data.title}
+                    data-zoom
+                    data-gallery={JSON.stringify(media)}
+                    data-caption={p.data.title}
+                  />
+                  {media.length > 1 && <span class="more-count">+{media.length - 1}</span>}
+                </div>
+              )}
+              <h3>{href ? <a href={href}>{p.data.title}</a> : p.data.title}</h3>
+              <p class="part-meta">{[...p.data.tags, p.data.date].join(' · ')}</p>
+              <div class="part-summary" set:html={md(p.data.summary)} />
+              {linkList.length > 0 && (
+                <p class="links">{linkList.map((l) => <a href={l.href}>{l.label}</a>)}</p>
+              )}
+            </article>
           );
         })}
-      </ul>
+      </div>
     </section>
   )}
 </Base>
