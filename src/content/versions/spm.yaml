@@ -143,7 +143,7 @@ versions:
       images: [soon]
       specs:
         Functionality: BNO085 IMU task-space feedback + SIP mounting
-        Parameters: α1 = x, α2 = y, β = z
+        Parameters: \[parameters still being optimized]
         Slop: "~0.0000\" (projected 🤞)"
       notes: "this is a projected slop value (this prototype is not yet physically realized)"
     manufacturing:
