@@ -28,7 +28,15 @@ const steps = versions
   .map((to, i) => ({ from: versions[i - 1], to }))
   .filter(({ from, to }) => from && to.improvements.length > 0);
 // `soon` in place of an image path shows a "coming soon" box.
-const isSoon = (src: string) => src.trim().toLowerCase() === 'soon';
+// `soon 1:2` sets the box's width:height shape (default 4:3).
+const soonMatch = (src: string) => src.trim().match(/^soon(?:\s+(\d*\.?\d+)\s*:\s*(\d*\.?\d+))?$/i);
+const isSoon = (src: string) => Boolean(soonMatch(src));
+const soonStyle = (src: string, vi: number, catId: string, i: number) => {
+  const m = soonMatch(src);
+  const ratio = m?.[1] ? `aspect-ratio: ${m[1]} / ${m[2]}; ` : '';
+  return ratio + vt(vi, catId, i);
+};
+const showGenerations = data.generations;
 
 const newestFirst = versions.map((v, i) => ({ v, i })).reverse();
 const cols = `--cols: ${versions.length}`;
@@ -47,10 +55,12 @@ const cols = `--cols: ${versions.length}`;
     </div>
   )}
 
+  {showGenerations && (
   <div class="mode-toggle" role="group" aria-label="View">
-    <button type="button" data-mode-btn="compare" aria-pressed="true">Compare</button>
-    <button type="button" data-mode-btn="generations" aria-pressed="false">Generations</button>
-  </div>
+      <button type="button" data-mode-btn="compare" aria-pressed="true">Compare</button>
+      <button type="button" data-mode-btn="generations" aria-pressed="false">Generations</button>
+    </div>
+  )}
 
   <!-- Compare: one section per category, one column per version -->
   <div class="compare" data-view="compare" style={cols}>
@@ -59,7 +69,11 @@ const cols = `--cols: ${versions.length}`;
         <div class="cell label"></div>
         {versions.map((v) => (
           <div class="cell">
-            <a href={`#${anchor(v.name)}`} data-jump class="vname">{v.name}</a>
+            {showGenerations ? (
+              <a href={`#${anchor(v.name)}`} data-jump class="vname">{v.name}</a>
+            ) : (
+              <span class="vname">{v.name}</span>
+            )}
             {v.label && <span class="vlabel">{v.label}</span>}
           </div>
         ))}
@@ -75,7 +89,7 @@ const cols = `--cols: ${versions.length}`;
                 <span class="cell-vname">{v.name}</span>
                 {(details(v, cat.id)?.images ?? []).map((src, i) =>
                   isSoon(src) ? (
-                    <div class="proto-soon" style={vt(vi, cat.id, i)}>{v.soonText ?? 'Physical prototype coming soon'}</div>
+                    <div class="proto-soon" style={soonStyle(src, vi, cat.id, i)}>{v.soonText ?? 'Physical prototype coming soon'}</div>
                   ) : (
                     <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
                   ),
@@ -112,6 +126,7 @@ const cols = `--cols: ${versions.length}`;
   </div>
 
   <!-- Generations: newest first, with sticky jump links -->
+  {showGenerations && (
   <div class="generations" data-view="generations" hidden>
     <nav class="gen-nav" aria-label="Versions">
       {newestFirst.map(({ v }) => <a href={`#${anchor(v.name)}`} data-jump>{v.name}</a>)}
@@ -142,7 +157,7 @@ const cols = `--cols: ${versions.length}`;
               <h4>{cat.title}</h4>
               {d.images.map((src, i) =>
                 isSoon(src) ? (
-                  <div class="proto-soon" style={vt(vi, cat.id, i)}>{v.soonText ?? 'Physical prototype coming soon'}</div>
+                  <div class="proto-soon" style={soonStyle(src, vi, cat.id, i)}>{v.soonText ?? 'Physical prototype coming soon'}</div>
                 ) : (
                   <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
                 ),
@@ -167,6 +182,7 @@ const cols = `--cols: ${versions.length}`;
       </article>
     ))}
   </div>
+  )}
 </section>
 
 <script>

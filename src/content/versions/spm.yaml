@@ -9,13 +9,16 @@
 # versions = columns, OLDEST FIRST. Add a new version at the bottom.
 #   Under each version, use a category id as a key with any of:
 #     images: list of paths in public/ (stacked top to bottom; jpg/png/gif/mp4/webm)
-#             write `soon` instead of a path for a "Physical prototype coming soon" box
+#             write `soon` instead of a path for a "Physical prototype coming soon" box;
+#             `soon 1:2` makes it 1 wide by 2 tall (default 4:3)
 #             (change its text for a version with `soonText: ...`)
 #     specs:  values for that category's spec names (plain text, e.g. "±0.5°")
 #     notes:  a sentence or two
 #   Missing specs show as "—".
 
 title: Design iterations
+# Set to true to show the Generations view (each version on its own) again.
+generations: false
 
 categories:
   - id: drivetrain
@@ -128,7 +131,7 @@ versions:
       - optimize end effector platform parameters for workspace size and dexterity
       - add controller routine to self-rotate when approaching workspace boundaries to avoid singularities
     drivetrain:
-      images: [soon, /projects/spm/v3/spmv3_drivetrain_section.png]
+      images: [soon 1:1.9, /projects/spm/v3/spmv3_drivetrain_section.png]
       specs:
         Drive type: Direct drive
         Backlash: "0.0° (projected 🤞)"

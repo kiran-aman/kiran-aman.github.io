@@ -636,3 +636,4 @@ a.zoom { cursor: zoom-in; }
   text-align: center;
 }
 .gen-cat .proto-soon { margin-bottom: 10px; }
+.versions:not(:has(.mode-toggle)) .compare { margin-top: 8px; }

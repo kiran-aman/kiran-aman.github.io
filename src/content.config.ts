@@ -64,6 +64,8 @@ const versions = defineCollection({
   schema: z
     .object({
       title: z.string().default('Design iterations'),
+      // false hides the Generations view (and its button) and shows Compare only.
+      generations: z.boolean().default(true),
       // Rows of the comparison, in order.
       categories: z.array(
         z.object({
