@@ -117,7 +117,7 @@ curriculum:
       - /projects/machining/globe/cube_globe_2.jpg
       - /projects/machining/globe/cube_globe_3.jpg
     summary: |
-      The stand and half ring are both made of bronze, while the cube is made of stainless steel. It's attached via screws on the top and bottom of the half ring that fit in bearings, so the cube spins very smoothly. Might not depict Earth in some perspectives (opinions), but it is at a 23.44±10° angle. Composed of 4 parts: cube, half ring, rectangle, base
+      The stand and half ring are both made of bronze, while the cube is made of stainless steel. It's attached via screws on the top and bottom of the half ring that fit in bearings, so the cube spins very smoothly. Might not depict Earth, but it is at a 23.44±10° angle. Composed of 4 parts: cube, half ring, rectangle, base
 
       I'm actually currently working on a spherical earth with sandblasted continents, if this is still a cube then I'm not done yet. It was a little sketchy when I used 3D printed fixtures (90% infill) to mill the flats and drill holes at the corners of the cube, but it worked well.
     skills: [Making a cube on the mill, slitting saw, slab milling, 3D printed fixturing]
@@ -159,13 +159,13 @@ gallery:
     machine: Lathe
     summary: Inspiration for the lighthouse keychain (see above); this was the first major machining project I ever did.
 
-  - name: Quoted part (some driveshaft)
+  - name: Aluminum driveshafts
     category: quoted
     images: [/projects/machining/driveshaft/quoted_job.jpg]
     material: Aluminum
     machine: Lathe
     operations: [Single point threading, turning, polishing]
-    summary: Quoted job I did for the Makerspace for a lab on campus. I think it's a driveshaft
+    summary: Quoted job I did for the Makerspace for a lab on campus.
 
   - name: SPM stepper motor mount
     category: other
@@ -181,7 +181,7 @@ gallery:
     summary: |
       A NEMA 17 stepper motor mount for my V2 SPM project (I didn't end up using this part)
 
-      I made it because I didn't want to study for my finals. I realized that it would be a much better idea to just 3D print these, since they're not structurally super important and this took me 10 hours.
+      I realized that it would be a much better idea to just 3D print these, since they're not structurally super important and took me 10 hours to make.
 
   - name: SPM cage
     category: other
@@ -195,7 +195,7 @@ gallery:
     summary: |
       A structual 'cage' for the V2 SPM project; holds tensioner platforms, shaft support, and aligns with the central shaft
 
-      I designed this part to be as simple to machine as possible, still took me like 15 hours. Luckily it was 1 attempt. 
+      I designed this part to be as simple to machine as possible, still took me like 15 hours. I actually screwed it up minorly somewhere around hour 7 but decided to redesign the part to incorporate the new feature
 
   - name: SPM plate(s)
     category: other
@@ -208,7 +208,7 @@ gallery:
     summary: |
       Two generations of stepper plates for the V2 SPM project; they attach the stepper motors to the cage and align them
 
-      When I redesigned this part, I realized that I should just make everything as big as possible to prevent later headaches. They say premature optimization is the root of all evil
+      When I redesigned this part, I realized that I should just make everything as big as possible to prevent later headaches. They do say premature optimization is the root of all evil
 
   - name: SPM long shaft
     category: other
