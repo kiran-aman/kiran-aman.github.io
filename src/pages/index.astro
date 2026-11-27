@@ -48,6 +48,9 @@ const hrefFor = (p: (typeof all)[number]) =>
               <p class="meta">
                 {[...p.data.tags, p.data.date].join(' · ')}
               </p>
+              {hasPage(p) && (
+                <a class="see-more" href={`/projects/${p.id}/`}>Click to see more →</a>
+              )}
             </div>
           </li>
         ))}

@@ -591,3 +591,12 @@ a.zoom { cursor: zoom-in; }
 .other-work .part h3 a { color: inherit; }
 .other-work .part h3 a:hover { color: var(--link); }
 .other-work .links { margin: 4px 0 0; font-size: 0.9rem; }
+
+/* "Click to see more" under each featured project */
+.see-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.see-more:hover { text-decoration: underline; }
