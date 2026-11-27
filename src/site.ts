@@ -1,6 +1,6 @@
 export const site = {
   name: 'Kiran Aman',
-  about: `NJIT ADHC | Mechanical + Computer Engineering
+  about: `Honors College @ NJIT | Mechanical + Computer Engineering
   
   Below is a selection of my work including research, engineering, and machining projects. At the bottom is a gallery of various other smaller projects that I've worked on
 
