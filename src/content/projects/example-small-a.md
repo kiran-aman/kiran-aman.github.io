@@ -1,11 +1,11 @@
 ---
-title: Small Project A
-summary: A short caption.
-date: 2025-06
-thumbnail: /projects/example-small-a/thumb.svg
+title: Double parallelogram pick and place machine
+summary: I made this in about 2 weeks as a final project for one of my classes
+date: Apr. 2025
+thumbnail: /projects/pick_place/pickplace_thumb.mp4
 images:
-  - /projects/machining/placeholder-tall.svg
-  - /projects/machining/placeholder-wide.svg
+  - /projects/pick_place/linkage.png
+  - /projects/pick_place/swivel_base.png
 links:
   repo: https://github.com/kiran-aman
 ---
