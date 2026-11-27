@@ -129,7 +129,7 @@ versions:
       images: [/projects/spm/v3/drivetrain-1.svg, /projects/spm/v3/drivetrain-2.svg]
       specs:
         Drive type: Direct drive
-        Backlash: "0.0°????"
+        Backlash: "0.0° (projected 🤞)"
         Reduction: 1:1
         Torque: 5.5 N·m continuous, 16 N·m peak
         Max speed: ~1800 rpm @ 48 V (this value is way higher than other limiting factors)
@@ -139,7 +139,7 @@ versions:
       specs:
         Functionality: BNO085 IMU task-space feedback + SIP mounting
         Parameters: α1 = x, α2 = y, β = z
-        Slop: "~0.0000\"!!!"
+        Slop: "~0.0000\" (projected 🤞)"
       notes: "this is a projected slop value (this prototype is not yet physically realized)"
     manufacturing:
       images: [/projects/spm/v3/manufacturing-1.svg]

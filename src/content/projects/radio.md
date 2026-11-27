@@ -6,6 +6,4 @@ thumbnail: /projects/radio/radio_cnc.png
 images:
   - /projects/radio/radio_scan.png
   - /projects/radio/radio_wood.jpg
-links:
-  repo: https://github.com/kiran-aman
 ---

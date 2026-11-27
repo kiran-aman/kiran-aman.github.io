@@ -6,6 +6,4 @@ thumbnail: /projects/pick_place/pickplace_thumb.mp4
 images:
   - /projects/pick_place/linkage.png
   - /projects/pick_place/swivel_base.png
-links:
-  repo: https://github.com/kiran-aman
 ---

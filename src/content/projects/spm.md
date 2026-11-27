@@ -22,18 +22,22 @@ order: 2
 
 ## Overview
 
+Current research project for which I'm the primary contributor, advised by Dr. Adeel Akhtar in the Geometric Robotics and Dynamical Systems Lab (Mechanical Engineering, NJIT). The system uses a coaxial spherical parallel manipulator to balance a spherical inverted pendulum in a compact footprint (see [Significance](#significance)). Two hardware generations so far, with a third in development. Accepted and presented at **IROS 2026** as a Late-Breaking Result:
+
+**Kiran Aman** and Adeel Akhtar, "Geometric Modeling and Hardware Validation of a Coaxial 3-RRR Manipulator for Spherical Inverted Pendulum Stabilization," *IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), Late-Breaking Results*, Pittsburgh, PA, Sept. 2026.
+
+### Background
+
 I initially began independently developing a 3D-printed V1 prototype of a cool mechanism I saw a video of, being a coaxial 3-rrr spherical parallel manipulator (SPM). It has since gone through 2 iterations, with V3 currently in development, along with many scope changes to become pretty much my entire life's work (this is a joke (kind of)).
 
-Currently in development, V3 focuses on: 
+### Current work
+
+In development, V3 focuses on: 
 1. creating a **model-based nonlinear controller (MPC)** to balance a spherical inverted pendulum (SIP) on the SPM's end effector platform (ie the SPM-SIP system),
 2. a high-fidelity **digital twin in MuJoCo** for controller verification, and
 3. refining previous V2 hardware to a V3 generation, focusing primarily on a large architectural change to the drivetrain (belt-driven -> **direct-drive**) and an optimization of kinematic parameters for **workspace/dexterity***
 
 \* also looking into \'self-rotation\' (see eccentric continuous rotation) near type-1 singularities (workspace boundary) to possibly extend our usable workspace by leveraging the benefits of the chosen coaxial design.
-
-This was accepted and presented at IROS 2026 as a Late-Breaking Result in Pittsburgh,
-
-**Kiran Aman** and Adeel Akhtar (2026, September). *Geometric Modeling and Hardware Validation of a Coaxial 3-RRR Manipulator for Spherical Inverted Pendulum Stabilization*.
 
 ## Significance
 
