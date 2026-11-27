@@ -85,10 +85,3 @@ which is the full, coupled SPM-SIP model.
 
 
 </details>
-
-<details>
-<summary><h2>What I learned</h2></summary>
-
-I applied for 3 grants over the course of this project, and I've only been awarded 1 of them. Funding was sort of always a struggle with this project, especially given that it started as completely independent. After being rejected funding to continue V2, I decided to self fund the entire project other than machining services, which truly would have broken the bank. So I just machined all the parts myself (see machining log) and bought the hardware/materials I'd need.
-
-</details>
