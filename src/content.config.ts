@@ -85,6 +85,8 @@ const versions = defineCollection({
             summary: z.string().optional(),
             links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
             improvements: z.array(z.string()).default([]),
+            // Text for `soon` image boxes in this version.
+            soonText: z.string().optional(),
           })
           // Every other key is a category id from the list above.
           .catchall(categoryDetails),
@@ -92,7 +94,7 @@ const versions = defineCollection({
     })
     .superRefine((data, ctx) => {
       const ids = new Set(data.categories.map((c) => c.id));
-      const fixed = new Set(['name', 'label', 'date', 'status', 'summary', 'links', 'improvements']);
+      const fixed = new Set(['name', 'label', 'date', 'status', 'summary', 'links', 'improvements', 'soonText']);
       data.versions.forEach((v, i) => {
         for (const key of Object.keys(v)) {
           if (!fixed.has(key) && !ids.has(key)) {

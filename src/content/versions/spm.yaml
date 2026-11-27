@@ -9,6 +9,8 @@
 # versions = columns, OLDEST FIRST. Add a new version at the bottom.
 #   Under each version, use a category id as a key with any of:
 #     images: list of paths in public/ (stacked top to bottom; jpg/png/gif/mp4/webm)
+#             write `soon` instead of a path for a "Physical prototype coming soon" box
+#             (change its text for a version with `soonText: ...`)
 #     specs:  values for that category's spec names (plain text, e.g. "±0.5°")
 #     notes:  a sentence or two
 #   Missing specs show as "—".
@@ -126,7 +128,7 @@ versions:
       - optimize end effector platform parameters for workspace size and dexterity
       - add controller routine to self-rotate when approaching workspace boundaries to avoid singularities
     drivetrain:
-      images: [/projects/spm/v3/drivetrain-1.svg, /projects/spm/v3/spmv3_drivetrain_section.png]
+      images: [soon, /projects/spm/v3/spmv3_drivetrain_section.png]
       specs:
         Drive type: Direct drive
         Backlash: "0.0° (projected 🤞)"
@@ -135,7 +137,7 @@ versions:
         Max speed: ~1800 rpm @ 48 V (this value is way higher than other limiting factors)
       notes: "these are projected backlash/speed values (this prototype is not yet physically realized)"
     platform:
-      images: [/projects/spm/v3/platform-1.svg]
+      images: [soon]
       specs:
         Functionality: BNO085 IMU task-space feedback + SIP mounting
         Parameters: α1 = x, α2 = y, β = z

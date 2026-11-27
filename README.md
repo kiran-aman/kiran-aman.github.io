@@ -54,7 +54,9 @@ by `.github/workflows/deploy.yml` on every push to `main`.
   for `projects/spm.md`) to add a Compare / Generations section to that project page.
   `categories` are the rows, `versions` are the columns (oldest first). See `versions/spm.yaml`
   for a commented example. A category can have `notes:` (full-width footnotes, e.g. for `*` or `†`
-  markers in spec values). Images go in `public/projects/<project-id>/`.
+  markers in spec values).
+  Each version's `improvements` show as "V1 → V2", "V2 → V3" boxes above the Compare/Generations
+  buttons. Write `soon` in place of an image path for a "Physical prototype coming soon" box. Images go in `public/projects/<project-id>/`.
 
 - **Curriculum and parts gallery:** create `src/content/parts/<project-id>.yaml` (see
   `parts/machining.yaml` for every field, with comments). Curriculum lessons show a photo next to

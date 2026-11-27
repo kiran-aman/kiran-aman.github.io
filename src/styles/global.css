@@ -600,3 +600,39 @@ a.zoom { cursor: zoom-in; }
   font-weight: 600;
 }
 .see-more:hover { text-decoration: underline; }
+
+/* Improvements between versions, above the Compare/Generations buttons */
+.improvement-steps {
+  display: grid;
+  grid-template-columns: repeat(var(--steps), 1fr);
+  gap: 16px;
+  margin: 0 0 24px;
+}
+.improvement-steps .step {
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+.improvement-steps h3 { margin: 0 0 8px; font-size: 1rem; }
+.improvement-steps .improvements li { margin-bottom: 4px; }
+@media (max-width: 640px) {
+  .improvement-steps { grid-template-columns: 1fr; }
+}
+
+/* `soon` image placeholder in design iterations */
+.proto-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  padding: 12px;
+  background: var(--placeholder);
+  border: 1px dashed var(--rule);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.gen-cat .proto-soon { margin-bottom: 10px; }

@@ -23,11 +23,29 @@ const vt = (vi: number, catId: string, i: number) => `view-transition-name: vt-$
 
 const footnotes = (cat: (typeof categories)[number]) => (cat.notes ? [cat.notes].flat() : []);
 
+// Each version's improvements over the one before it, oldest first.
+const steps = versions
+  .map((to, i) => ({ from: versions[i - 1], to }))
+  .filter(({ from, to }) => from && to.improvements.length > 0);
+// `soon` in place of an image path shows a "coming soon" box.
+const isSoon = (src: string) => src.trim().toLowerCase() === 'soon';
+
 const newestFirst = versions.map((v, i) => ({ v, i })).reverse();
 const cols = `--cols: ${versions.length}`;
 ---
 <section class="versions" data-versions data-mode="compare">
   <h2 class="versions-title">{data.title}</h2>
+
+  {steps.length > 0 && (
+    <div class="improvement-steps" style={`--steps: ${steps.length}`}>
+      {steps.map(({ from, to }) => (
+        <div class="step">
+          <h3>{from.name} → {to.name}</h3>
+          <ul class="improvements">{to.improvements.map((x) => <li set:html={md(x)} />)}</ul>
+        </div>
+      ))}
+    </div>
+  )}
 
   <div class="mode-toggle" role="group" aria-label="View">
     <button type="button" data-mode-btn="compare" aria-pressed="true">Compare</button>
@@ -55,9 +73,13 @@ const cols = `--cols: ${versions.length}`;
             {versions.map((v, vi) => (
               <div class="cell">
                 <span class="cell-vname">{v.name}</span>
-                {(details(v, cat.id)?.images ?? []).map((src, i) => (
-                  <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
-                ))}
+                {(details(v, cat.id)?.images ?? []).map((src, i) =>
+                  isSoon(src) ? (
+                    <div class="proto-soon" style={vt(vi, cat.id, i)}>{v.soonText ?? 'Physical prototype coming soon'}</div>
+                  ) : (
+                    <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
+                  ),
+                )}
               </div>
             ))}
           </div>
@@ -86,21 +108,6 @@ const cols = `--cols: ${versions.length}`;
         </div>
       ))}
 
-      <div class="compare-cat">
-        <h3 class="cat-title">Improvements</h3>
-        <div class="row">
-          <div class="cell label"></div>
-          {versions.map((v, vi) => (
-            <div class="cell">
-              {v.improvements.length > 0 ? (
-                <ul class="improvements">{v.improvements.map((x) => <li set:html={md(x)} />)}</ul>
-              ) : (
-                <span class="empty">{vi === 0 ? 'Baseline' : '—'}</span>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   </div>
 
@@ -133,9 +140,13 @@ const cols = `--cols: ${versions.length}`;
           return (
             <section class="gen-cat">
               <h4>{cat.title}</h4>
-              {d.images.map((src, i) => (
-                <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
-              ))}
+              {d.images.map((src, i) =>
+                isSoon(src) ? (
+                  <div class="proto-soon" style={vt(vi, cat.id, i)}>{v.soonText ?? 'Physical prototype coming soon'}</div>
+                ) : (
+                  <Media src={src} alt={`${v.name} ${cat.title} ${i + 1}`} data-zoom style={vt(vi, cat.id, i)} />
+                ),
+              )}
               {specs.length > 0 && (
                 <dl class="specs">
                   {specs.map((s) => (
